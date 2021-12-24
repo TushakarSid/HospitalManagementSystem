@@ -7,11 +7,7 @@ export default class CreateAppointment extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeDocName = this.onChangeDocName.bind(this);
-    this.onChangeHealthIssues = this.onChangeHealthIssues.bind(this);
-    this.onChangeDuration = this.onChangeDuration.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+   
 
     this.state = {
       docName: '',
@@ -38,31 +34,31 @@ export default class CreateAppointment extends Component {
 
   }
 
-  onChangeDocName(e) {
+  onChangeDocName = (e) => {
     this.setState({
       docName: e.target.value
     })
   }
 
-  onChangeHealthIssues(e) {
+  onChangeHealthIssues= (e) =>{
     this.setState({
       healthIssues: e.target.value
     })
   }
 
-  onChangeDuration(e) {
+  onChangeDuration= (e) => {
     this.setState({
       duration: e.target.value
     })
   }
 
-  onChangeDate(date) {
+  onChangeDate= (date) => {
     this.setState({
       date: date
     })
   }
 
-  onSubmit(e) {
+  onSubmit= (e) => {
     e.preventDefault();
 
     const appointment = {
