@@ -8,14 +8,14 @@ export default class Editappointment extends Component {
     super(props);
 
     this.onChangedocName = this.onChangedocName.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangehealthIssues = this.onChangehealthIssues.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       docName: '',
-      description: '',
+      healthIssues: '',
       duration: 0,
       date: new Date(),
       docNames: []
@@ -27,7 +27,7 @@ export default class Editappointment extends Component {
       .then(response => {
         this.setState({
           docName: response.data.docName,
-          description: response.data.description,
+          healthIssues: response.data.healthIssues,
           duration: response.data.duration,
           date: new Date(response.data.date)
         })   
@@ -56,9 +56,9 @@ export default class Editappointment extends Component {
     })
   }
 
-  onChangeDescription(e) {
+  onChangehealthIssues(e) {
     this.setState({
-      description: e.target.value
+      healthIssues: e.target.value
     })
   }
 
@@ -79,7 +79,7 @@ export default class Editappointment extends Component {
 
     const appointment = {
       docName: this.state.docName,
-      description: this.state.description,
+      healthIssues: this.state.healthIssues,
       duration: this.state.duration,
       date: this.state.date
     }
@@ -98,7 +98,7 @@ export default class Editappointment extends Component {
       <h3>Edit Appointment Details </h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
-          <label>docName: </label>
+          <label>Doctor's Name:</label>
           <select ref="userInput"
               required
               className="form-control"
@@ -115,12 +115,12 @@ export default class Editappointment extends Component {
           </select>
         </div>
         <div className="form-group"> 
-          <label>Description: </label>
+          <label>Describe your Health Issues:</label>
           <input  type="text"
               required
               className="form-control"
-              value={this.state.description}
-              onChange={this.onChangeDescription}
+              value={this.state.healthIssues}
+              onChange={this.onChangehealthIssues}
               />
         </div>
         <div className="form-group">

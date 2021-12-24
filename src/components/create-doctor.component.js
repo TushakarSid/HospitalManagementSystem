@@ -56,12 +56,13 @@ export default class CreateDoctor extends Component {
       mobile: '',
       password: '',
     })
-    console.log("heeeeee")
+    // console.log("heeeeee")
   }
 
   render() {
     return (
-      <div>
+      <div className='row'>
+      <div className='col-md-6'>
         <h3>Register yourself Doc!</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
@@ -102,6 +103,51 @@ export default class CreateDoctor extends Component {
           </div>
         </form>
       </div>
+      <div className='col-md-6'>
+        <h3>Register yourself Doc!</h3>
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              placeholder="Full Name"
+              required
+              className="form-control"
+              value={this.state.docName}
+              onChange={this.onChangeDocName}
+            />
+          </div>
+          <div className="form-group">
+            <label>Mobile Number </label>
+            <input
+              type="tel"
+              placeholder="Mobile Number"
+              required
+              className="form-control"
+              value={this.state.mobile}
+              onChange={this.onChangeMobile}
+            />
+          </div>
+          <div className="form-group">
+            <label>Create Password</label>
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              className="form-control"
+              value={this.state.password}
+              onChange={this.onChangePassword}
+            />
+          </div>
+          <div className="form-group">
+            <input type="submit" value="Register" className="btn btn-primary" />
+          </div>
+        </form>
+      </div>
+      </div>
+
+      
+      
     )
   }
 }
