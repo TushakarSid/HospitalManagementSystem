@@ -28,8 +28,8 @@ const Navbar = () => {
                     </NavLink>
                 </NavMenu>
             <NavBtn>
-                <NavBtnLink to="/login">
-                    Sign In
+                <NavBtnLink to="/SignUp">
+                    Sign Up
                 </NavBtnLink>
             </NavBtn>
             </Nav>
