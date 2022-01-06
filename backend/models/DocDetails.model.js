@@ -5,7 +5,14 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema(
   {
-    docName: {
+    docFName: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      minlength: 3,
+    }, 
+    docLName: {
       type: String,
       required: true,
       unique: true,
@@ -14,6 +21,11 @@ const userSchema = new Schema(
     },
     mobile: {
       type: Number,
+      required: true,
+      unique: true,
+    },
+    email: {
+      type: String,
       required: true,
       unique: true,
     },

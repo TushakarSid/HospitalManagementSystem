@@ -8,13 +8,17 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const docName = req.body.docName;
+  const docFName = req.body.docFName;
+  const docLName = req.body.docLName;
   const mobile = req.body.mobile;
+  const email = req.body.email;
   const password = req.body.password;
 
   const newDoc = new DocDetails({
-    docName,
+    docFName,
+    docLName,
     mobile,
+    email,
     password
   });
 
