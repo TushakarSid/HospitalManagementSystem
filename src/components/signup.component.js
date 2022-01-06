@@ -26,7 +26,18 @@ export default class SignUp extends Component {
                     <input type="password" className="form-control" placeholder="Enter password" />
                 </div>
 
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+                <div className="form-group radio">
+                    <label style={{margin:10}}>
+                        <input type="radio" value="Patient" name="Category"/>
+                        <span>Patient</span>
+                    </label>
+                    <label>
+                        <input type="radio" value="Doctor" name="Category"/>
+                        <span>Doctor</span>
+                    </label>
+                </div>
+
+               <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                 <p className="forgot-password text-right">
                     Already registered <a href="/login">log in?</a>
                 </p>
