@@ -4,81 +4,81 @@ import axios from 'axios'
 
 export default class Login extends Component {
 
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props)
 
-        
-        this.onChangeEmail = this.onChangeEmail.bind(this)
-        this.onChangePassword = this.onChangePassword.bind(this)
-        this.onChangeCategory = this.onChangeCategory.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
 
-        this.state = {
-            email: '',
-            password: '',
-            unregistered: 'true',
-            category: ''
-        }
+    /* this.onChangeEmail = this.onChangeEmail.bind(this)
+    this.onChangePassword = this.onChangePassword.bind(this)
+    this.onChangeCategory = this.onChangeCategory.bind(this)
+    this.onSubmit = this.onSubmit.bind(this) */
+
+    this.state = {
+      email: '',
+      password: '',
+      unregistered: 'true',
+      category: ''
     }
-    onChangeEmail(e) {
-        this.setState({
-            email: e.target.value,
+  }
+  onChangeEmail = (e) => {
+    this.setState({
+      email: e.target.value,
+    })
+  }
+  onChangePassword = (e) => {
+    this.setState({
+      password: e.target.value,
+    })
+  }
+  onChangeCategory = (e) => {
+    // const { name, value } = e.target;
+    this.setState({
+      category: e.target.value,
+    })
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault()
+
+    const doctor = {
+      email: this.state.email,
+      password: this.state.password,
+    }
+
+    if (this.state.category === "Doctor") {
+      console.log("here")
+
+      axios
+        .post('http://localhost:5000/doctor/comparePasswordByEmail/', doctor)
+        .then((res) => {
+
+          if (res.data.message === "Try Signing In") {
+            this.setState({
+              unregistered: false
+            })
+
+          }
+          else {
+            window.location = "http://localhost:3000/"
+          }
         })
-    }
-    onChangePassword(e) {
-        this.setState({
-            password: e.target.value,
+        .catch((error) => {
+          console.log(error);
         })
+
+      // this.setState({
+      //     email: '',
+      //     password: '',
+      //     category: '',
+      // })
+      // console.log("heeeeee")
     }
-     onChangeCategory(e) {
-        // const { name, value } = e.target;
-        this.setState({
-            category: e.target.value,
-        })
+    else {
+      console.log("for patient!")
     }
 
-    onSubmit(e) {
-        e.preventDefault()
 
-        const doctor = {
-            email: this.state.email,
-            password: this.state.password,
-        }
-
-        if(this.state.category == "Doctor"){
-            console.log("here")
-
-            axios
-                .post('http://localhost:5000/doctor/comparePasswordByEmail/', doctor)
-                .then((res) => {
-
-                    if(res.data.message =="Try Signing In"){
-                        this.setState({
-                            unregistered:false
-                        })
-                        
-                    }
-                    else {
-                        window.location = "http://localhost:3000/"  
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
-                
-            // this.setState({
-            //     email: '',
-            //     password: '',
-            //     category: '',
-            // })
-            // console.log("heeeeee")
-        }
-        else{
-            console.log("for patient!")
-        }
-
-
-    }
+  }
 
   render() {
     return (
@@ -86,7 +86,7 @@ export default class Login extends Component {
         <div className="inner">
           <form onSubmit={this.onSubmit}>
             <h3>Log in</h3>
-   
+
 
             <div className="form-group">
               <label>Email</label>
@@ -112,7 +112,7 @@ export default class Login extends Component {
 
               />
             </div>
-            <div className="form-group radio">
+            {<div className="form-group radio">
               <label style={{ margin: 10 }}>
                 <input
                   type="radio"
@@ -132,9 +132,9 @@ export default class Login extends Component {
                 />
                 <span>Doctor</span>
               </label>
-            </div>
-            
-            {(this.state.unregistered===false)?<div style={{color:'Red'}}> Register Yourself </div>:<div></div>}
+            </div>}
+
+            {(this.state.unregistered === false) ? <div style={{ color: 'Red' }}> Register Yourself </div> : <div></div>}
 
             {/* <div className="form-group">
               <div className="custom-control custom-checkbox">

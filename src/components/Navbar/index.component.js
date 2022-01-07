@@ -21,13 +21,13 @@ const Navbar = () => {
         </NavLink>
         <Bars />
         <NavMenu>
-          <NavLink to="contact" activeStyle>
+          <NavLink to="contact" activestyle>
             Contact us
           </NavLink>
-          <NavLink to="doctors" activeStyle>
+          <NavLink to="doctors" activestyle>
             Our Doctors
           </NavLink>
-          <NavLink to="medicine" activeStyle>
+          <NavLink to="medicine" activestyle>
             Pharmacy
           </NavLink>
         </NavMenu>
