@@ -87,6 +87,26 @@ export default class SignUp extends Component {
         }
         else {
             console.log("for patient!")
+
+            axios
+                .post('http://localhost:5000/patient/add', doctor)
+                .then((res) => {
+                    console.log(res.status)
+                    this.setState({
+                        errors: 0,
+                        category:'Patient',
+                    })
+                })
+                .catch((error) => {
+                    console.log("i am here")
+                    console.log(error);
+                    this.setState({
+                        errors: 1,
+                        category:'Patient',
+                    })
+                    console.log(this.state.errors)
+                    console.log(this.state.category)
+                })
         }
 
 
@@ -156,10 +176,7 @@ export default class SignUp extends Component {
                         </div>
                        
                         {(this.state.errors === 1) ? <div style={{color:'red'}}>Some errors , check the fields , or try again later</div> : <div></div>}
-                        <div  style={{color:'white'}}>
-                            {this.state.errors}
-                            heyyy
-                        </div>
+                        
 
                         <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                         <p className="forgot-password text-right">
