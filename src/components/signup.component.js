@@ -6,22 +6,14 @@ export default class SignUp extends Component {
 
     constructor(props) {
         super(props)
-
-        /* this.onChangeDocFName = this.onChangeDocFName.bind(this)
-        this.onChangeDocLName = this.onChangeDocLName.bind(this)
-        this.onChangeMobile = this.onChangeMobile.bind(this)
-        this.onChangeEmail = this.onChangeEmail.bind(this)
-        this.onChangePassword = this.onChangePassword.bind(this)
-        this.onChangeCategory = this.onChangeCategory.bind(this)*/
-        this.onSubmit = this.onSubmit.bind(this)
-
         this.state = {
             docFName: '',
             docLName: '',
             mobile: '',
             email: '',
             password: '',
-            category: ''
+            category: 'Doctor',
+            errors: 0,
         }
     }
     onChangeDocFName = (e) => {
@@ -50,15 +42,15 @@ export default class SignUp extends Component {
         })
     }
     onChangeCategory = (e) => {
-        // const { name, value } = e.target;
         this.setState({
             category: e.target.value,
         })
     }
+   
 
     
 
-    onSubmit(e) {
+    onSubmit = (e) => {
         e.preventDefault()
 
         const doctor = {
@@ -69,28 +61,29 @@ export default class SignUp extends Component {
             password: this.state.password
         }
 
-        if (this.state.category === "Doctor") {
+        if (this.state.category == "Doctor") {
             console.log("here")
 
             axios
                 .post('http://localhost:5000/doctor/add', doctor)
-                .then((res) => console.log(res.data))
-                .catch((error) => {
-                    console.log(error);
+                .then((res) => {
+                    console.log(res.status)
+                    this.setState({
+                        errors: 0,
+                        category:'Doctor',
+                    })
                 })
-
-
-             this.setState({
-                docFName: '',
-                docLName: '',
-                mobile: '',
-                email: '',
-                password: '',
-                category: ''
-            }) 
-
-            //console.log(this.state.category)
-            // console.log("heeeeee")
+                .catch((error) => {
+                    console.log("i am here")
+                    console.log(error);
+                    this.setState({
+                        errors: 1,
+                        category:'Doctor',
+                    })
+                    console.log(this.state.errors)
+                    console.log(this.state.category)
+                })
+             
         }
         else {
             console.log("for patient!")
@@ -112,47 +105,60 @@ export default class SignUp extends Component {
                             <label>First name</label>
                             <input type="text" className="form-control" placeholder="First name"
                                 value={this.state.docFName}
-                                onChange={this.onChangeDocFName} />
+                                onChange={this.onChangeDocFName}
+                                required />
                         </div>
 
                         <div className="form-group">
                             <label>Last name</label>
                             <input type="text" className="form-control" placeholder="Last name"
                                 value={this.state.docLName}
-                                onChange={this.onChangeDocLName} />
+                                onChange={this.onChangeDocLName} 
+                                required/>
                         </div>
 
                         <div className="form-group">
                             <label>Mobile Number </label>
                             <input type="tel" className="form-control" placeholder="Mobile Number email"
                                 value={this.state.mobile}
-                                onChange={this.onChangeMobile} />
+                                onChange={this.onChangeMobile} 
+                                required/>
                         </div>
                         <div className="form-group">
                             <label>Email</label>
                             <input type="email" className="form-control" placeholder="Enter email"
                                 value={this.state.email}
-                                onChange={this.onChangeEmail} />
+                                onChange={this.onChangeEmail} 
+                                required/>
                         </div>
 
                         <div className="form-group">
                             <label>Password</label>
                             <input type="password" className="form-control" placeholder="Enter password"
                                 value={this.state.password}
-                                onChange={this.onChangePassword} />
+                                onChange={this.onChangePassword}
+                                required />
                         </div>
 
                         <div className="form-group radio">
                             <label style={{ margin: 10 }}>
                                 <input type="radio" value="Patient" name="Category"
-                                    onChange={this.onChangeCategory} />
+                                    onChange={this.onChangeCategory} 
+                                    required/>
                                 <span>Patient</span>
                             </label>
                             <label>
                                 <input type="radio" value="Doctor" name="Category"
-                                    onChange={this.onChangeCategory} />
+                                    onChange={this.onChangeCategory}
+                                    checked />
                                 <span>Doctor</span>
                             </label>
+                        </div>
+                       
+                        {(this.state.errors === 1) ? <div style={{color:'red'}}>Some errors , check the fields , or try again later</div> : <div></div>}
+                        <div  style={{color:'white'}}>
+                            {this.state.errors}
+                            heyyy
                         </div>
 
                         <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>

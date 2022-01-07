@@ -31,10 +31,14 @@ const Navbar = () => {
             Pharmacy
           </NavLink>
         </NavMenu>
+
+
         <NavBtn>
           <NavBtnLink to="/SignUp">Sign Up</NavBtnLink>
         </NavBtn>
       </Nav>
+      <h1 >main page </h1>
+
     </>
   )
 }

@@ -16,7 +16,7 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      unregistered: 'true',
+      unregistered: true,
       category: ''
     }
   }
