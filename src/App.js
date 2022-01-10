@@ -1,5 +1,6 @@
-import React from 'react';
+import React ,{useContext}  from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import UserState ,{Context} from './components/UserState';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './index.css';
 
@@ -12,23 +13,24 @@ import CreateAppointment from "./components/create-appointment.component";
 import Login from "./components/login.component";
 import SignUp from "./components/signup.component";
 
-function App() {
+
+const  App = ()=> {
   return (
 
     <Router>
       <div className="App">
-        <Mainbar />
-        <br />
-        {/* <Route path="/" component={Mainbar} /> */}
+        <UserState>
+
+            <Mainbar />
             <Route path="/list" component={AppointmentList}/>
             <Route path="/edit/:id" component={EditAppointment} />
             <Route path="/create" component={CreateAppointment} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
+        </UserState>
 
       </div>
     </Router>
   );
 }
-
 export default App;

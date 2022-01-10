@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Context } from './UserState'
+import UserState from './UserState'
 import {
   Nav,
   NavLink,
@@ -8,9 +10,14 @@ import {
   NavBtnLink,
 } from '../style/NavbarStyle'
 
+const newState = {
+  email: 'dfghjk@ghjk.hbjhk',
+  password: 'ghgujhbk',
+}
 const Navbar = () => {
+  const [baseEmail, basePassword, setbaseEmail, setbasePassword] = useContext(Context);
   return (
-    <>
+    <userState>
       <Nav>
         <NavLink to="/">
           <img
@@ -20,9 +27,7 @@ const Navbar = () => {
           />
         </NavLink>
 
-        <div style={{display:'flex', justifyContent:'space-between'}}>
-
-
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Bars />
           <NavMenu>
             <NavLink to="contact" activestyle>
@@ -36,14 +41,24 @@ const Navbar = () => {
             </NavLink>
           </NavMenu>
 
-
           <NavBtn>
             <NavBtnLink to="/SignUp">Login / SignUp</NavBtnLink>
           </NavBtn>
         </div>
       </Nav>
 
-    </>
+      {/* {(setbaseEmail('bn,m'), setbasePassword('jbj,kjj'))} */}
+     
+      <div>
+        <p>
+          email :{baseEmail}
+        </p>
+        <p>
+          password :{basePassword}
+        </p>
+
+      </div> 
+    </userState>
   )
 }
 
@@ -53,5 +68,5 @@ const styles = {
     marginRight: 20,
   },
 }
-
+Navbar.contextType = Context
 export default Navbar
