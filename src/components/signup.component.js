@@ -88,7 +88,7 @@ export default class SignUp extends Component {
         else {
             console.log("for patient!")
 
-            const doctor = {
+            const patient = {
                 PatFName: this.state.docFName,
                 PatLName: this.state.docLName,
                 mobile: this.state.mobile,
@@ -96,7 +96,7 @@ export default class SignUp extends Component {
                 password: this.state.password
             }
             axios
-                .post('http://localhost:5000/patient/add', doctor)
+                .post('http://localhost:5000/patient/add', patient)
                 .then((res) => {
                     console.log(res.status)
                     this.setState({
