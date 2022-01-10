@@ -156,10 +156,7 @@ export default class SignUp extends Component {
                         </div>
                        
                         {(this.state.errors === 1) ? <div style={{color:'red'}}>Some errors , check the fields , or try again later</div> : <div></div>}
-                        <div  style={{color:'white'}}>
-                            {this.state.errors}
-                            heyyy
-                        </div>
+                       
 
                         <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                         <p className="forgot-password text-right">
