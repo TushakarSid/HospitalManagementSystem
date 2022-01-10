@@ -3,7 +3,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './index.css';
 
-import Mainbar from "./components/Navbar/index.component"
+import Mainbar from "./components/navbar.component"
 import Navbar from "./components/navbar.component"
 import AppointmentList from "./components/appointment-list.component";
 import EditAppointment from "./components/edit-appointment.component";
@@ -14,6 +14,7 @@ import SignUp from "./components/signup.component";
 
 function App() {
   return (
+
     <Router>
       <div className="App">
         <Mainbar />

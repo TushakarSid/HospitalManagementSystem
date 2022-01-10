@@ -1,27 +1,57 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import {
+  Nav,
+  NavLink,
+  Bars,
+  NavMenu,
+  NavBtn,
+  NavBtnLink,
+} from '../style/NavbarStyle'
 
-export default class Navbar extends Component {
+const Navbar = () => {
+  return (
+    <>
+      <Nav>
+        <NavLink to="/">
+          <img
+            style={styles.Icon}
+            src="https://www.nitj.ac.in/physics/caneupa2020/images/logo_250.png"
+            alt="logo"
+          />
+        </NavLink>
 
-  render() {
-    return (
-      <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-        <Link to="/" className="navbar-brand">Hospitality</Link>
-        
-        <div className="collpase navbar-collapse">
-          <ul className="navbar-nav mr-auto">
-            <li className="navbar-item">
-              <Link to="/list" className="nav-link">Appointments</Link>
-            </li>
-            <li className="navbar-item">
-              <Link to="/create" className="nav-link">Create Appointments</Link>
-            </li>
-            <li className="navbar-item">
-              <Link to="/user" className="nav-link">Doctor Registration</Link>
-            </li>
-          </ul>
+        <div style={{display:'flex', justifyContent:'space-between'}}>
+
+
+          <Bars />
+          <NavMenu>
+            <NavLink to="contact" activestyle>
+              Contact us
+            </NavLink>
+            <NavLink to="doctors" activestyle>
+              Our Doctors
+            </NavLink>
+            <NavLink to="medicine" activestyle>
+              Pharmacy
+            </NavLink>
+          </NavMenu>
+
+
+          <NavBtn>
+            <NavBtnLink to="/SignUp">Login / SignUp</NavBtnLink>
+          </NavBtn>
         </div>
-      </nav>
-    );
-  }
+      </Nav>
+
+    </>
+  )
 }
+
+const styles = {
+  Icon: {
+    height: 70,
+    marginRight: 20,
+  },
+}
+
+export default Navbar
