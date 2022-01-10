@@ -46,23 +46,23 @@ export default class SignUp extends Component {
             category: e.target.value,
         })
     }
-   
 
-    
+
+
 
     onSubmit = (e) => {
         e.preventDefault()
 
-        const doctor = {
-            docFName: this.state.docFName,
-            docLName: this.state.docLName,
-            mobile: this.state.mobile,
-            email: this.state.email,
-            password: this.state.password
-        }
 
         if (this.state.category == "Doctor") {
             console.log("here")
+            const doctor = {
+                docFName: this.state.docFName,
+                docLName: this.state.docLName,
+                mobile: this.state.mobile,
+                email: this.state.email,
+                password: this.state.password
+            }
 
             axios
                 .post('http://localhost:5000/doctor/add', doctor)
@@ -70,7 +70,7 @@ export default class SignUp extends Component {
                     console.log(res.status)
                     this.setState({
                         errors: 0,
-                        category:'Doctor',
+                        category: 'Doctor',
                     })
                 })
                 .catch((error) => {
@@ -78,15 +78,42 @@ export default class SignUp extends Component {
                     console.log(error);
                     this.setState({
                         errors: 1,
-                        category:'Doctor',
+                        category: 'Doctor',
                     })
                     console.log(this.state.errors)
                     console.log(this.state.category)
                 })
-             
+
         }
         else {
             console.log("for patient!")
+
+            const doctor = {
+                PatFName: this.state.docFName,
+                PatLName: this.state.docLName,
+                mobile: this.state.mobile,
+                email: this.state.email,
+                password: this.state.password
+            }
+            axios
+                .post('http://localhost:5000/patient/add', doctor)
+                .then((res) => {
+                    console.log(res.status)
+                    this.setState({
+                        errors: 0,
+                        category: 'Patient',
+                    })
+                })
+                .catch((error) => {
+                    console.log("i am here")
+                    console.log(error);
+                    this.setState({
+                        errors: 1,
+                        category: 'Patient',
+                    })
+                    console.log(this.state.errors)
+                    console.log(this.state.category)
+                })
         }
 
 
@@ -113,23 +140,23 @@ export default class SignUp extends Component {
                             <label>Last name</label>
                             <input type="text" className="form-control" placeholder="Last name"
                                 value={this.state.docLName}
-                                onChange={this.onChangeDocLName} 
-                                required/>
+                                onChange={this.onChangeDocLName}
+                                required />
                         </div>
 
                         <div className="form-group">
                             <label>Mobile Number </label>
                             <input type="tel" className="form-control" placeholder="Mobile Number email"
                                 value={this.state.mobile}
-                                onChange={this.onChangeMobile} 
-                                required/>
+                                onChange={this.onChangeMobile}
+                                required />
                         </div>
                         <div className="form-group">
                             <label>Email</label>
                             <input type="email" className="form-control" placeholder="Enter email"
                                 value={this.state.email}
-                                onChange={this.onChangeEmail} 
-                                required/>
+                                onChange={this.onChangeEmail}
+                                required />
                         </div>
 
                         <div className="form-group">
@@ -143,8 +170,8 @@ export default class SignUp extends Component {
                         <div className="form-group radio">
                             <label style={{ margin: 10 }}>
                                 <input type="radio" value="Patient" name="Category"
-                                    onChange={this.onChangeCategory} 
-                                    required/>
+                                    onChange={this.onChangeCategory}
+                                    required />
                                 <span>Patient</span>
                             </label>
                             <label>
@@ -154,9 +181,10 @@ export default class SignUp extends Component {
                                 <span>Doctor</span>
                             </label>
                         </div>
-                       
-                        {(this.state.errors === 1) ? <div style={{color:'red'}}>Some errors , check the fields , or try again later</div> : <div></div>}
-                       
+
+                        {(this.state.errors === 1) ? <div style={{ color: 'red' }}>Some errors , check the fields , or try again later</div> : <div></div>}
+
+
 
                         <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                         <p className="forgot-password text-right">
