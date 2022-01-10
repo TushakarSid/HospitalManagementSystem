@@ -19,25 +19,29 @@ const Navbar = () => {
             alt="logo"
           />
         </NavLink>
-        <Bars />
-        <NavMenu>
-          <NavLink to="contact" activestyle>
-            Contact us
-          </NavLink>
-          <NavLink to="doctors" activestyle>
-            Our Doctors
-          </NavLink>
-          <NavLink to="medicine" activestyle>
-            Pharmacy
-          </NavLink>
-        </NavMenu>
+
+        <div style={{display:'flex', justifyContent:'space-between'}}>
 
 
-        <NavBtn>
-          <NavBtnLink to="/SignUp">Sign Up</NavBtnLink>
-        </NavBtn>
+          <Bars />
+          <NavMenu>
+            <NavLink to="contact" activestyle>
+              Contact us
+            </NavLink>
+            <NavLink to="doctors" activestyle>
+              Our Doctors
+            </NavLink>
+            <NavLink to="medicine" activestyle>
+              Pharmacy
+            </NavLink>
+          </NavMenu>
+
+
+          <NavBtn>
+            <NavBtnLink to="/SignUp">Login / SignUp</NavBtnLink>
+          </NavBtn>
+        </div>
       </Nav>
-      <h1 >main page </h1>
 
     </>
   )

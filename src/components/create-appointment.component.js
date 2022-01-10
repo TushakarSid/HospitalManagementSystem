@@ -21,11 +21,13 @@ export default class CreateAppointment extends Component {
   componentDidMount() {
     axios.get('http://localhost:5000/doctor/')
       .then(response => {
+        console.log("here")
         if (response.data.length > 0) {
           this.setState({
-            docNames: response.data.map(docdetails => docdetails.docName),
-            docName: response.data[0].docName
+            docNames: response.data.map(docdetails => docdetails.docFName),
+            docName: response.data[0].docFName
           })
+          console.log(this.state.docNames)
         }
       })
       .catch((error) => {

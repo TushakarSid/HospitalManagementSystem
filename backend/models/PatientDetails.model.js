@@ -52,16 +52,16 @@ userSchema.pre('save', function (next) {
 });
 
 
-userSchema.methods.comparePassword = async function (password) {
-    if (!password) throw new Error('Password is mission, can not compare!');
+// userSchema.methods.comparePassword = async function (password) {
+//     if (!password) throw new Error('Password is mission, can not compare!');
   
-    try {
-      const result = await bcrypt.compare(password, this.password);
-      return result;
-    } catch (error) {
-      console.log('Error while comparing password!', error.message);
-    }
-  };
+//     try {
+//       const result = await bcrypt.compare(password, this.password);
+//       return result;
+//     } catch (error) {
+//       console.log('Error while comparing password!', error.message);
+//     }
+//   };
   
   const PatientDetails = mongoose.model('patientdetails', userSchema)
   

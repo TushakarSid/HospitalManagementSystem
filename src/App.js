@@ -19,11 +19,9 @@ function App() {
         <Mainbar />
         <br />
         {/* <Route path="/" component={Mainbar} /> */}
-        <Route path="/list" component={AppointmentList}/>
-      <Route path="/edit/:id" component={EditAppointment} />
-      <Route path="/create" component={CreateAppointment} />
-
-        
+            <Route path="/list" component={AppointmentList}/>
+            <Route path="/edit/:id" component={EditAppointment} />
+            <Route path="/create" component={CreateAppointment} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
 

@@ -83,7 +83,7 @@ export default class SignUp extends Component {
                     console.log(this.state.errors)
                     console.log(this.state.category)
                 })
-
+                window.location.href = "/"
         }
         else {
             console.log("for patient!")
@@ -114,6 +114,7 @@ export default class SignUp extends Component {
                     console.log(this.state.errors)
                     console.log(this.state.category)
                 })
+                window.location.href = "/"
         }
 
 

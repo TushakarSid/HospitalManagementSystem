@@ -40,7 +40,7 @@ export default class Login extends Component {
   onSubmit = (e) => {
     e.preventDefault()
 
-    const doctor = {
+    const details = {
       email: this.state.email,
       password: this.state.password,
     }
@@ -49,7 +49,7 @@ export default class Login extends Component {
       console.log("here")
 
       axios
-        .post('http://localhost:5000/doctor/comparePasswordByEmail/', doctor)
+        .post('http://localhost:5000/doctor/comparePasswordByEmail/', details)
         .then((res) => {
 
           if (res.data.message === "Try Signing In") {
@@ -73,8 +73,27 @@ export default class Login extends Component {
       // })
       // console.log("heeeeee")
     }
-    else {
+    else if(this.state.category === "Patient"){
       console.log("for patient!")
+
+      axios
+        .post('http://localhost:5000/patient/comparePasswordByEmail/', details)
+        .then((res) => {
+
+          if (res.data.message === "Try Signing In") {
+            this.setState({
+              unregistered: false
+            })
+
+          }
+          else {
+            window.location = "http://localhost:3000/"
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+
     }
 
 
