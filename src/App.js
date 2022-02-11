@@ -9,6 +9,7 @@ import Navbar from "./components/navbar.component"
 import AppointmentList from "./components/appointment-list.component";
 import EditAppointment from "./components/edit-appointment.component";
 import CreateAppointment from "./components/create-appointment.component";
+import Doctors from "./components/doctors.component"
 
 import Login from "./components/login.component";
 import SignUp from "./components/signup.component";
@@ -19,15 +20,19 @@ const  App = ()=> {
 
     <Router>
       <div className="App">
-        <UserState>
+        {/*<UserState>
 
-            <Mainbar />
+        <Mainbar />*/}
+        <Mainbar />
+        <br />
+        {/* <Route path="/" component={Mainbar} /> */}
+            <Route path="/doctors" component={Doctors}/>
             <Route path="/list" component={AppointmentList}/>
             <Route path="/edit/:id" component={EditAppointment} />
-            <Route path="/create" component={CreateAppointment} />
+            <Route path="/:doctor/create" component={CreateAppointment} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
-        </UserState>
+        {/*</UserState>*/}
 
       </div>
     </Router>

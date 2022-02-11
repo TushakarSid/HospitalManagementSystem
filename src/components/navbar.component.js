@@ -15,9 +15,10 @@ const newState = {
   password: 'ghgujhbk',
 }
 const Navbar = () => {
-  const [baseEmail, basePassword, setbaseEmail, setbasePassword] = useContext(Context);
+ /*  const [baseEmail, basePassword, setbaseEmail, setbasePassword] = useContext(Context); */
   return (
-    <userState>
+  
+  
       <Nav>
         <NavLink to="/">
           <img
@@ -47,18 +48,7 @@ const Navbar = () => {
         </div>
       </Nav>
 
-      {/* {(setbaseEmail('bn,m'), setbasePassword('jbj,kjj'))} */}
      
-      <div>
-        <p>
-          email :{baseEmail}
-        </p>
-        <p>
-          password :{basePassword}
-        </p>
-
-      </div> 
-    </userState>
   )
 }
 

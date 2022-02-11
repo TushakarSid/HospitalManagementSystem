@@ -11,7 +11,7 @@ import axios from 'axios'
 // }
 
  const SignUp = () => {
-    const [baseEmail, basePassword, setbaseEmail, setbasePassword] = useContext(Context);
+   /*  const [baseEmail, basePassword, setbaseEmail, setbasePassword] = useContext(Context); */
 
     const [docFName, setdocFName] = useState();
     const [docLName, setdocLName] = useState();
@@ -20,12 +20,6 @@ import axios from 'axios'
     const [password, setpassword] = useState();
     const [category, setcategory] = useState('Doctor');
     const [errors, seterrors] = useState();
-
-
-
-
-
-
 
 
     const onChangeDocFName = (e) => { setdocFName(e.target.value) }
@@ -110,7 +104,7 @@ import axios from 'axios'
     }
 
     return (
-        <userState>
+       
             
             <div className="outer">
                 <div className="inner">
@@ -215,22 +209,9 @@ import axios from 'axios'
                         </p>
                     </form>
                 </div>
+           </div>
 
-                {/* <UserState>
-          <temporary></temporary>
-          context[0].email= {email}
-          {console.log(context[0].email)}
-          {console.log(email)}
-        </UserState> */}
-            </div>
-
-            {
-                (email)?setbaseEmail(email):(<></>)
-            }
-            {
-                (password)?setbasePassword(password):(<></>)
-            }
-        </userState>
+               
 
     )
 

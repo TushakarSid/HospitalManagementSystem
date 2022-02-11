@@ -2,15 +2,21 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { useParams } from 'react-router-dom';
+
+
+
 
 export default class CreateAppointment extends Component {
+
+  
   constructor(props) {
     super(props);
 
-   
+    const {doctor} = useParams(); 
 
     this.state = {
-      docName: '',
+      docName: doctor,
       healthIssues: '',
       duration: 0,
       date: new Date(),
@@ -19,6 +25,7 @@ export default class CreateAppointment extends Component {
   }
 
   componentDidMount() {
+    console.log('he')
     axios.get('http://localhost:5000/doctor/')
       .then(response => {
         console.log("here")
@@ -80,7 +87,8 @@ export default class CreateAppointment extends Component {
 
   render() {
     return (
-    <div>
+      <div>
+      console.log('here')
       <h3>Enter Appointment Details</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
