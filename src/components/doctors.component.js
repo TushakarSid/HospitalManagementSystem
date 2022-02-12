@@ -29,7 +29,7 @@ const Doctors = () => {
   return (
     <div>
       {doctor.map((resp)=>(
-        <Card docFName={resp.docFName} docLName = {resp.docLName} />
+        <Card docFName={resp.docFName} docLName = {resp.docLName} doctorId = {resp._id}/>
         //console.log(resp)
       ))}
     </div>

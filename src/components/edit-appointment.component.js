@@ -1,24 +1,112 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect,useState } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { useParams } from 'react-router-dom';
 
+
+const Editappointment = () =>{
+
+  let [healthIssues, sethealthIssues] = useState("");
+  let [date, setdate] = useState(new Date());
+  let  [ docId, setdocId] = useState();
+
+  const {id} = useParams();
+  
+  const onChangeHealthIssues = (e) => {
+    sethealthIssues(e.target.value);
+  };
+  const onChangeDate = (date) => {
+    setdate(date);
+  };
+
+  useEffect(()=>{
+    axios.get('http://localhost:5000/appointment/'+id)
+    .then(response => {
+      docId = response.data.docId
+      healthIssues =  response.data.healthIssues
+      date =  new Date(response.data.date)
+    })
+  })
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const appointment = {
+      docId: docId,
+      healthIssues: healthIssues,
+      date: date
+    };
+
+
+    console.log(appointment);
+
+    axios
+      .post("http://localhost:5000/appointment/update", appointment)
+      .then((res) => console.log(res.data));
+
+    window.location = "/";
+
+  };
+
+  return (
+    <div>
+      console.log('here')
+      <h3>Enter Appointment Details</h3>
+      <form onSubmit={onSubmit}>     
+        <div className="form-group">
+          <label>Describe your Health Issues: </label>
+          <input
+            type="text"
+            required
+            className="form-control"
+            value={healthIssues}
+            onChange={onChangeHealthIssues}
+          />
+        </div>
+        
+        <div className="form-group">
+          <label>Date: </label>
+          <div>
+            <DatePicker
+              selected={date}
+              onChange={onChangeDate}
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <input
+            type="submit"
+            value="Edit appointment Log"
+            className="btn btn-primary"
+          />
+        </div>
+
+      </form>
+    </div>
+  )
+}
+
+export default Editappointment
+
+/* 
 export default class Editappointment extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangedocName = this.onChangedocName.bind(this);
+    this.onChang  docId = this.onChang docId.bind(this);
     this.onChangehealthIssues = this.onChangehealthIssues.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      docName: '',
+      docId: '',
       healthIssues: '',
       duration: 0,
       date: new Date(),
-      docNames: []
+      docIds: []
     }
   }
 
@@ -26,7 +114,7 @@ export default class Editappointment extends Component {
     axios.get('http://localhost:5000/appointment/'+this.props.match.params.id)
       .then(response => {
         this.setState({
-          docName: response.data.docName,
+          docId: response.data docId,
           healthIssues: response.data.healthIssues,
           duration: response.data.duration,
           date: new Date(response.data.date)
@@ -40,7 +128,7 @@ export default class Editappointment extends Component {
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
-            docNames: response.data.map(docName => docName.docName),
+            docIds: response.data.map  docId => docId),
           })
         }
       })
@@ -50,9 +138,9 @@ export default class Editappointment extends Component {
 
   }
 
-  onChangedocName(e) {
+  onChang docId(e) {
     this.setState({
-      docName: e.target.value
+      docId: e.target.value
     })
   }
 
@@ -78,7 +166,7 @@ export default class Editappointment extends Component {
     e.preventDefault();
 
     const appointment = {
-      docName: this.state.docName,
+      docId: this.state  docId,
       healthIssues: this.state.healthIssues,
       duration: this.state.duration,
       date: this.state.date
@@ -102,13 +190,13 @@ export default class Editappointment extends Component {
           <select ref="userInput"
               required
               className="form-control"
-              value={this.state.docName}
-              onChange={this.onChangedocName}>
+              value={this.state docId}
+              onChange={this.onChang  docId}>
               {
-                this.state.docNames.map(function(docName) {
+                this.state  docIds.map(function  docId) {
                   return <option 
-                    key={docName}
-                    value={docName}>{docName}
+                    key=  docId}
+                    value=  docId}>  docId}
                     </option>;
                 })
               }
@@ -149,4 +237,4 @@ export default class Editappointment extends Component {
     </div>
     )
   }
-}
+} */

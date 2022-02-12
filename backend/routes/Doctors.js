@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 
 router.route('/').get((req, res) => {
   DocDetails.find()
-    .then((DocDetails) => res.json(DocDetails))
+    .then(DocDetails => res.json(DocDetails))
     .catch((err) => res.status(400).json('Error: ' + err))
 })
 
@@ -30,6 +30,8 @@ router.route('/add').post((req, res) => {
     .then(() => res.json('Doctor Registered!'))
     .catch((err) => res.status(400).json('Error: ' + err))
 })
+
+
 
 router.route('/comparePasswordByEmail').post(async (req, res) => {
   const email = req.body.email

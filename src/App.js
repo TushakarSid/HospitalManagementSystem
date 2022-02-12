@@ -29,7 +29,7 @@ const  App = ()=> {
             <Route path="/doctors" component={Doctors}/>
             <Route path="/list" component={AppointmentList}/>
             <Route path="/edit/:id" component={EditAppointment} />
-            <Route path="/:doctor/create" component={CreateAppointment} />
+            <Route path="/:doctorId/create" component={CreateAppointment} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
         {/*</UserState>*/}
