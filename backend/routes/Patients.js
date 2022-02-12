@@ -10,25 +10,38 @@ router.route('/').get((req, res) => {
 
 
   
-router.route('/add').post((req, res) => {
-    const PatFName = req.body.PatFName
-    const PatLName = req.body.PatLName
-    const mobile = req.body.mobile
-    const email = req.body.email
-    const password = req.body.password
+router.route('/add').post(async(req, res) => {
+  const PatFName = req.body.PatFName
+  const PatLName = req.body.PatLName
+  const mobile = req.body.mobile
+  const email = req.body.email
+  const password = req.body.password
+  console.log(email)
   
-    const newDoc = new PatientDetails({
+    const newPat = new PatientDetails({
       PatFName,
       PatLName,
       mobile,
       email,
       password,
     })
-  
-    newDoc
-      .save()
-      .then(() => res.json('Patient Registered!'))
-      .catch((err) => res.status(400).json('Error: ' + err))
+
+    const emailAlreadyExist = await PatientDetails.find({ email: email })
+    const mobileAlreadyExist = await PatientDetails.find({ mobile: mobile })
+
+    if(emailAlreadyExist.length > 0){
+      return res.json({success: false, message: 'Email already in Use'})
+    }
+    else if(mobileAlreadyExist.length > 0){
+      return res.json({success: false, message: 'Mobile Number Already Registered'})
+    }
+    else{
+      newPat
+        .save()
+        .then(() => res.json('Patient Registered!')
+        )
+        .catch((err) => res.status(400).json('Error: ' + err))
+      }
   })
 
 
@@ -36,19 +49,11 @@ router.route('/add').post((req, res) => {
     const email = req.body.email
     const password = req.body.password
   
-    console.log(email)
-    // var actpass
-    // try{
       const actPass = await PatientDetails.find({ email: email })
       console.log(actPass.length)
       if(actPass.length==0){
-        return res.json({success: false, message: 'Try Signing In'})
-  
+        return res.json({success: false, message: 'Register Yourself!'})
       }
-    // }
-    // catch{
-    //   console.log("no such email in db")
-    // }
     console.log(actPass[0].password)
     console.log(password)
   

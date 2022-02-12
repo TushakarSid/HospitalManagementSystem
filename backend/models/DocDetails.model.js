@@ -8,17 +8,16 @@ const userSchema = new Schema(
     docFName: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
       minlength: 3,
     }, 
     docLName: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
       minlength: 3,
     },
+
     mobile: {
       type: Number,
       required: true,

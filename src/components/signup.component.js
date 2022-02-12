@@ -1,17 +1,11 @@
-import React, { Component, useState, useContext } from 'react'
-import UserState, { Context } from './UserState'
-import temporary from './temporary.component'
+import React, { Component, useState, useContext  } from 'react'
+
 import axios from 'axios'
 
 
-// const newState = {
 
-//     email = email,
-//     password = password
-// }
-
- const SignUp = () => {
-   /*  const [baseEmail, basePassword, setbaseEmail, setbasePassword] = useContext(Context); */
+const SignUp = () => {
+    // const [baseEmail , setbaseEmail] = useContext(Context);
 
     const [docFName, setdocFName] = useState();
     const [docLName, setdocLName] = useState();
@@ -20,20 +14,24 @@ import axios from 'axios'
     const [password, setpassword] = useState();
     const [category, setcategory] = useState('Doctor');
     const [errors, seterrors] = useState();
+    const [unRegistered, setUnRegistered] = useState(0);
 
 
     const onChangeDocFName = (e) => { setdocFName(e.target.value) }
     const onChangeDocLName = (e) => { setdocLName(e.target.value) }
     const onChangeMobile = (e) => { setmobile(e.target.value) }
-    const onChangeEmail = (e) => { setemail(e.target.value) }
-    const onChangePassword = (e) => { setpassword(e.target.value) }
+    const onChangeEmail = (e) => {
+         setemail(e.target.value) 
+        }
+    const onChangePassword = (e) => { 
+        setpassword(e.target.value) 
+    }
     const onChangeCategory = (e) => { setcategory(e.target.value) }
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        if (category == 'Doctor') {
-            console.log('here')
+        if (category === 'Doctor') {
             const doctor = {
                 docFName: docFName,
                 docLName: docLName,
@@ -45,27 +43,28 @@ import axios from 'axios'
             axios
                 .post('http://localhost:5000/doctor/add', doctor)
                 .then((res) => {
-                    console.log(res.status)
                     seterrors(0)
                     setcategory('Doctor')
-                    //   setState({
-                    //     errors: 0,
-                    //     category: 'Doctor',
-                    //   })
+                    if (res.data.message === "Email already in Use") {
+                        console.log("tttttttt")
+                        setUnRegistered(2)
+                      }
+                    else if (res.data.message === "Mobile Number Already Registered") {
+                        console.log("tttttttt")
+                        setUnRegistered(3)
+                      }
+                    else{
+                        // setbaseEmail(email)
+                          window.location.href = '/'
+                      }
                 })
                 .catch((error) => {
-                    console.log('i am here')
-                    console.log(error)
+
                     seterrors(1)
                     setcategory('Doctor')
-                    //   setState({
-                    //     errors: 1,
-                    //     category: 'Doctor',
-                    //   })
                     console.log(errors)
                     console.log(category)
                 })
-            window.location.href = '/create'
         } else {
             console.log('for patient!')
 
@@ -82,30 +81,22 @@ import axios from 'axios'
                     console.log(res.status)
                     seterrors(0)
                     setcategory('Patient')
-                    //   setState({
-                    //     errors: 0,
-                    //     category: 'Patient',
-                    //   })
                 })
                 .catch((error) => {
                     console.log('i am here')
                     console.log(error)
                     seterrors(1)
                     setcategory('Patient')
-                    //   setState({
-                    //     errors: 1,
-                    //     category: 'Patient',
-                    //   })
                     console.log(errors)
                     console.log(category)
                 })
-            window.location.href = '/create'
+            // window.location.href = '/'
         }
     }
 
     return (
-       
-            
+
+        <>
             <div className="outer">
                 <div className="inner">
                     <form onSubmit={onSubmit}>
@@ -193,13 +184,16 @@ import axios from 'axios'
                             </label>
                         </div>
 
-                        {errors === 1 ? (
+                        {(unRegistered == 2)?(<div style={{ color: 'red' }}>Email already in Use</div>):(<div></div>)}
+                        {(unRegistered == 3)?(<div style={{ color: 'red' }}>Mobile Number Already Registered</div>):(<div></div>)}
+                        {/* {(errors === 1 )? (
                             <div style={{ color: 'red' }}>
                                 Some errors , check the fields , or try again later
                             </div>
                         ) : (
                             <div></div>
-                        )}
+                        )
+                        } */}
 
                         <button type="submit" className="btn btn-dark btn-lg btn-block">
                             Register
@@ -211,12 +205,12 @@ import axios from 'axios'
                 </div>
            </div>
 
-               
-
+                
+        </>
     )
 
 
 }
 
-SignUp.contextType = Context
+// SignUp.contextType = Context
 export default SignUp

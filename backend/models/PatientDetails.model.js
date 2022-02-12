@@ -9,14 +9,12 @@ const userSchema = new Schema(
     PatFName: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
         minlength: 3,
     },
     PatLName: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
         minlength: 3,
     },

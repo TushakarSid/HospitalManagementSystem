@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
-import { Context } from './UserState'
-import UserState from './UserState'
+import React, { useContext , useState , useEffect} from 'react'
+import UserContext from './UserContext'
+import axios from 'axios'
+
 import {
   Nav,
   NavLink,
@@ -10,15 +11,43 @@ import {
   NavBtnLink,
 } from '../style/NavbarStyle'
 
-const newState = {
-  email: 'dfghjk@ghjk.hbjhk',
-  password: 'ghgujhbk',
-}
+
 const Navbar = () => {
- /*  const [baseEmail, basePassword, setbaseEmail, setbasePassword] = useContext(Context); */
+  // const [baseEmail, setbaseEmail ] = useContext(Context);
+  const {contextEmail, setContextEmail} = useContext(UserContext)
+  const {contextCategory, setContextCategory} = useContext(UserContext)
+  const {contextFname, setContextFname} = useContext(UserContext)
+  const x = localStorage.getItem('contextEmail')
+  const det = {
+    email : x
+  }
+
+  const [Fname , setFname] = useState()
+
+  useEffect(()=>{
+  
+
+    axios
+    .post('http://localhost:5000/doctor/getDetailsByEmail',det)
+    .then((res) => {
+      setFname(res.data.message)
+    })
+    .catch((error)=>{
+    })
+  
+  })
+
+  const logoutfunction = (e) =>{
+    console.log("here")
+    localStorage.removeItem('contextEmail')
+    localStorage.removeItem('contextCategory')
+    localStorage.removeItem('contextFname')
+    setContextFname(undefined)
+    setContextEmail(undefined)
+    // setContextCategory(undefined)
+  }
   return (
-  
-  
+    <>
       <Nav>
         <NavLink to="/">
           <img
@@ -31,24 +60,40 @@ const Navbar = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Bars />
           <NavMenu>
-            <NavLink to="contact" activestyle>
-              Contact us
+            <NavLink to="list" activestyle>
+              Appointments
             </NavLink>
-            <NavLink to="doctors" activestyle>
-              Our Doctors
+            <NavLink to="/edit/:id" activestyle>
+              Get an Appointment
             </NavLink>
             <NavLink to="medicine" activestyle>
               Pharmacy
             </NavLink>
           </NavMenu>
 
+          {
+          
+          (x=== null)?(
           <NavBtn>
             <NavBtnLink to="/SignUp">Login / SignUp</NavBtnLink>
           </NavBtn>
+
+          ):(
+            <NavBtn>
+            <NavLink style = {{paddingLeft: "43px"}} to="">
+                <a value="actual value 1">{Fname}</a> 
+                <a value="Logout" onClick ={logoutfunction}>&nbsp;Logout</a>
+
+           
+            </NavLink>
+          </NavBtn>
+          )}
         </div>
       </Nav>
 
-     
+
+    </>
+
   )
 }
 
@@ -58,5 +103,5 @@ const styles = {
     marginRight: 20,
   },
 }
-Navbar.contextType = Context
+// Navbar.contextType = Context
 export default Navbar

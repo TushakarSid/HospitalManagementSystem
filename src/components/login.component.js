@@ -1,93 +1,109 @@
-import React, { Component } from 'react'
+import React, {useState , useContext, useEffect} from 'react'
 import { FaWindows } from 'react-icons/fa'
 import axios from 'axios'
-
-export default class Login extends Component {
-
-  constructor(props) {
-    super(props)
+import UserContext  from './UserContext'
 
 
-    /* this.onChangeEmail = this.onChangeEmail.bind(this)
-    this.onChangePassword = this.onChangePassword.bind(this)
-    this.onChangeCategory = this.onChangeCategory.bind(this)
-    this.onSubmit = this.onSubmit.bind(this) */
+const Login = () => {
+  const {contextEmail ,setContextEmail}  = useContext(UserContext)
+  const {contextCategory ,setContextCategory}  = useContext(UserContext)
+  const {contextFname ,setContextFname}  = useContext(UserContext)
+  const [email, setemail] = useState();
+  const [password, setpassword] = useState();
+  const [unRegistered, setUnRegistered] = useState('0');
+  const [category, setCategory] = useState();
+  const [Fname, setFname] = useState();
 
-    this.state = {
-      email: '',
-      password: '',
-      unregistered: true,
-      category: ''
+  const onChangeEmail = (e) => { setemail(e.target.value)}
+  const onChangePassword = (e) => { setpassword(e.target.value)}
+  const onChangeCategory = (e) => { setCategory(e.target.value)}
+  useEffect(() =>{
+
+    if(contextEmail !== undefined){
+      localStorage.setItem('contextEmail', contextEmail)
+      localStorage.setItem('contextCategory', contextCategory)
+      localStorage.setItem('contextFname', contextFname)
+    const xx ={
+      email : localStorage.getItem('contextEmail')
+    } 
+    console.log(xx)
+
+    if(xx != null){
+        axios
+        .post('http://localhost:5000/doctor/getDetailsByEmail',xx)
+        .then((res) => {
+          console.log("first")
+          console.log(res.data.message)
+          setContextFname(res.data.message)
+          setFname(res.data.message)
+        })
+        .catch((error)=>{
+          console.log("jnkjnjnknjn")
+        })
+      // window.location.href = '/'
+
     }
   }
-  onChangeEmail = (e) => {
-    this.setState({
-      email: e.target.value,
-    })
-  }
-  onChangePassword = (e) => {
-    this.setState({
-      password: e.target.value,
-    })
-  }
-  onChangeCategory = (e) => {
-    // const { name, value } = e.target;
-    this.setState({
-      category: e.target.value,
-    })
-  }
+  })
 
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
 
     const details = {
-      email: this.state.email,
-      password: this.state.password,
+      email: email,
+      password: password,
     }
 
-    if (this.state.category === "Doctor") {
-      console.log("here")
+   
+    if (category === "Doctor") {
 
       axios
         .post('http://localhost:5000/doctor/comparePasswordByEmail/', details)
         .then((res) => {
 
-          if (res.data.message === "Try Signing In") {
-            this.setState({
-              unregistered: false
-            })
-
+          if (res.data.message === "Register Yourself") {
+            setUnRegistered('1')
+          }
+          else if(res.data.message === "Passwords do not match"){
+            setUnRegistered('2')
           }
           else {
-            window.location = "http://localhost:3000/"
+            localStorage.setItem('contextEmail', email)
+            localStorage.setItem('contextCategory', category)
+            localStorage.setItem('contextFname', Fname)
+            setContextEmail(email)
+            setContextCategory(category)
+            setContextFname(Fname)
+            // window.location.href = '/'
           }
         })
         .catch((error) => {
           console.log(error);
         })
 
-      // this.setState({
-      //     email: '',
-      //     password: '',
-      //     category: '',
-      // })
-      // console.log("heeeeee")
     }
-    else if(this.state.category === "Patient"){
+    else if(category === "Patient"){
       console.log("for patient!")
 
       axios
         .post('http://localhost:5000/patient/comparePasswordByEmail/', details)
         .then((res) => {
 
-          if (res.data.message === "Try Signing In") {
-            this.setState({
-              unregistered: false
-            })
-
+          if (res.data.message === "Register Yourself!") {
+            setUnRegistered('1')
+          }
+          else if (res.data.message === "Passwords do not match") {
+            setUnRegistered('2')
           }
           else {
-            window.location = "http://localhost:3000/"
+            localStorage.setItem('contextEmail', email)
+            localStorage.setItem('contextCategory', category)
+            localStorage.setItem('contextFname', Fname)
+            setContextEmail(email)
+            setContextCategory(category)
+            setContextFname(Fname)
+            // window.location.href = '/'
+
           }
         })
         .catch((error) => {
@@ -99,11 +115,10 @@ export default class Login extends Component {
 
   }
 
-  render() {
     return (
       <div className="outer">
         <div className="inner">
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={onSubmit}>
             <h3>Log in</h3>
 
 
@@ -113,7 +128,7 @@ export default class Login extends Component {
                 type="email"
                 className="form-control"
                 placeholder="Enter email"
-                onChange={this.onChangeEmail}
+                onChange={onChangeEmail}
                 required
 
               />
@@ -125,7 +140,7 @@ export default class Login extends Component {
                 type="password"
                 className="form-control"
                 placeholder="Enter password"
-                onChange={this.onChangePassword}
+                onChange={onChangePassword}
                 required
 
 
@@ -137,7 +152,7 @@ export default class Login extends Component {
                   type="radio"
                   value="Patient"
                   name="Category"
-                  onChange={this.onChangeCategory}
+                  onChange={onChangeCategory}
                   required
                 />
                 <span>Patient</span>
@@ -147,26 +162,14 @@ export default class Login extends Component {
                   type="radio"
                   value="Doctor"
                   name="Category"
-                  onChange={this.onChangeCategory}
+                  onChange={onChangeCategory}
                 />
                 <span>Doctor</span>
               </label>
             </div>}
 
-            {(this.state.unregistered === false) ? <div style={{ color: 'Red' }}> Register Yourself </div> : <div></div>}
-
-            {/* <div className="form-group">
-              <div className="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="customCheck1"
-                />
-                <label className="custom-control-label" htmlFor="customCheck1">
-                  Remember me
-                </label>
-              </div>
-            </div> */}
+            {(unRegistered === '1') ? <div style={{ color: 'Red' }}> Register Yourself </div> : <div></div>}
+            {(unRegistered === '2') ? <div style={{ color: 'Red' }}> Wrong Password </div> : <div></div>}
 
             <button type="submit" className="btn btn-dark btn-lg btn-block">
               Sign in
@@ -178,5 +181,6 @@ export default class Login extends Component {
         </div>
       </div>
     )
-  }
 }
+
+export default Login

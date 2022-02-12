@@ -9,8 +9,7 @@ router.route('/').get((req, res) => {
 })
 
 
-
-router.route('/add').post((req, res) => {
+router.route('/add').post(async(req, res) => {
   const docFName = req.body.docFName
   const docLName = req.body.docLName
   const mobile = req.body.mobile
@@ -25,10 +24,33 @@ router.route('/add').post((req, res) => {
     password,
   })
 
-  newDoc
-    .save()
-    .then(() => res.json('Doctor Registered!'))
-    .catch((err) => res.status(400).json('Error: ' + err))
+  const emailAlreadyExist = await DocDetails.find({ email: email })
+  const mobileAlreadyExist = await DocDetails.find({ mobile: mobile })
+
+    if(emailAlreadyExist.length > 0){
+      return res.json({success: false, message: 'Email already in Use'})
+    }
+    else if(mobileAlreadyExist.length > 0){
+      return res.json({success: false, message: 'Mobile Number Already Registered'})
+    }
+    else{
+      newDoc
+      .save()
+      .then(() => res.json('Doctor Registered!'))
+      .catch((err) => res.status(400).json('Error: ' + err))
+    }
+})
+
+router.route('/getDetailsByEmail').post( async(req, res) => {
+  const email = req.body.email
+  // const password = req.body.password
+  console.log(email)
+  const detail = await DocDetails.find({ email: email })
+  console.log(detail[0])
+  return res.json({success: false, message: detail[0].docFName})
+  // return detail[0]
+
+
 })
 
 router.route('/comparePasswordByEmail').post(async (req, res) => {
@@ -36,24 +58,17 @@ router.route('/comparePasswordByEmail').post(async (req, res) => {
   const password = req.body.password
 
   console.log(email)
-  // var actpass
-  // try{
     const actPass = await DocDetails.find({ email: email })
-    console.log(actPass.length)
+    console.log(actPass)
     if(actPass.length==0){
-      return res.json({success: false, message: 'Try Signing In'})
+      return res.json({success: false, message: 'Register Yourself'})
 
     }
-  // }
-  // catch{
-  //   console.log("no such email in db")
-  // }
   console.log(actPass[0].password)
   console.log(password)
 
   bcrypt.compare(password,  actPass[0].password, function(err, response) {
     if (err){
-      // handle error
       console.log(err)
       return res.json({success: false, message: 'Techniacl Issue! Try again later'})
     }
@@ -75,14 +90,6 @@ router.route('/comparePasswordByEmail').post(async (req, res) => {
   } catch (error) {
     console.log('Error while comparing password!', error.message)
   }
-  // const newDoc = new DocDetails({
-  //   email,
-  //   password
-  // });
-
-  // newDoc.save()
-  //   .then(() => res.json('Doctor Registered!'))
-  //   .catch(err => res.status(400).json('Error: ' + err));
 })
 
 module.exports = router
