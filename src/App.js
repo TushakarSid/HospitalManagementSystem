@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './index.css'
 
 import Mainbar from './components/navbar.component'
+
+import Doctors from './components/doctors.component'
 import AppointmentList from './components/appointment-list.component'
 import EditAppointment from './components/edit-appointment.component'
 import CreateAppointment from './components/create-appointment.component'
@@ -23,14 +25,35 @@ const App = () => {
       <Router>
         <div className="App">
           <Mainbar />
+          <Route path="/doctors" component={Doctors}/>
           <Route path="/list" component={AppointmentList} />
           <Route path="/edit/:id" component={EditAppointment} />
-          <Route path="/create" component={CreateAppointment} />
+          <Route path="/:doctorId/create" component={CreateAppointment} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
         </div>
       </Router>
     </UserContext.Provider>
   )
+
+    // <Router>
+    //   <div className="App">
+    //     {/*<UserState>
+
+    //     <Mainbar />*/}
+    //     <Mainbar />
+    //     <br />
+    //     {/* <Route path="/" component={Mainbar} /> */}
+    //         <Route path="/doctors" component={Doctors}/>
+    //         <Route path="/list" component={AppointmentList}/>
+    //         <Route path="/edit/:id" component={EditAppointment} />
+    //         <Route path="/:doctorId/create" component={CreateAppointment} />
+    //         <Route path="/login" component={Login} />
+    //         <Route path="/signup" component={SignUp} />
+    //     {/*</UserState>*/}
+
+    //   </div>
+    // </Router>
+  // );
 }
 export default App

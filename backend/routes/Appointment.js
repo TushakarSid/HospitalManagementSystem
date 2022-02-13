@@ -8,15 +8,14 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const docName = req.body.docName;
+  const docId = req.body.docId;
   const healthIssues = req.body.healthIssues;
-  const duration = Number(req.body.duration);
+  
   const date = Date.parse(req.body.date);
 
   const newAppointment = new Appointment({
-    docName,
+    docId,
     healthIssues,
-    duration,
     date,
   });
 
@@ -40,9 +39,9 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Appointment.findById(req.params.id)
     .then(Appointment => {
-      Appointment.docName = req.body.docName;
+      Appointment.docId = req.body.docId;
       Appointment.healthIssues = req.body.healthIssues;
-      Appointment.duration = Number(req.body.duration);
+      
       Appointment.date = Date.parse(req.body.date);
 
       Appointment.save()
