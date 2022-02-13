@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 const Editappointment = () =>{
 
   let [healthIssues, sethealthIssues] = useState("");
-  let [date, setdate] = useState(new Date());
+  let [date, setdate] = useState(new Date);
   let  [ docId, setdocId] = useState();
 
   const {id} = useParams();
@@ -21,13 +21,17 @@ const Editappointment = () =>{
   };
 
   useEffect(()=>{
-    axios.get('http://localhost:5000/appointment/'+id)
+    console.log(`http://localhost:5000/appointment/${id}`)
+    console.log(`http://localhost:5000/appointment/update/${id}`)
+
+    axios.get(`http://localhost:5000/appointment/${id}`)
     .then(response => {
-      docId = response.data.docId
-      healthIssues =  response.data.healthIssues
-      date =  new Date(response.data.date)
+      // console.log(response.data)
+      setdocId(response.data.docId)
+      sethealthIssues(response.data.healthIssues)
+      setdate(new Date(response.data.date))
     })
-  })
+  },[])
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +46,7 @@ const Editappointment = () =>{
     console.log(appointment);
 
     axios
-      .post("http://localhost:5000/appointment/update", appointment)
+      .post(`http://localhost:5000/appointment/update/${id}`, appointment)
       .then((res) => console.log(res.data));
 
     window.location = "/";
@@ -51,7 +55,6 @@ const Editappointment = () =>{
 
   return (
     <div>
-      console.log('here')
       <h3>Enter Appointment Details</h3>
       <form onSubmit={onSubmit}>     
         <div className="form-group">

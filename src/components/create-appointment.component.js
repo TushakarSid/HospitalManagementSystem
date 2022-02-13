@@ -35,12 +35,11 @@ const CreateAppointment = () => {
       .post("http://localhost:5000/appointment/add", appointment)
       .then((res) => console.log(res.data));
 
-    window.location = "/";
+    window.location = "/list";
   };
 
   return (
     <div>
-      console.log('here')
       <h3>Enter Appointment Details</h3>
       <form onSubmit={onSubmit}>     
         <div className="form-group">

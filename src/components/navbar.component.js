@@ -60,13 +60,13 @@ const Navbar = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Bars />
           <NavMenu>
-            <NavLink to="list" activestyle>
+            <NavLink to="/list" activestyle>
               Appointments
             </NavLink>
-            <NavLink to="/edit/:id" activestyle>
+            <NavLink to="/doctors" activestyle>
               Get an Appointment
             </NavLink>
-            <NavLink to="medicine" activestyle>
+            <NavLink to="/medicine" activestyle>
               Pharmacy
             </NavLink>
           </NavMenu>

@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 
 
 function Card(props) {
-   // console.log(props)
+  //  console.log(props)
 
-    console.log('ID here')
-    console.log(props.doctorId);
+    // console.log('ID here')
+    // console.log(props.doctorId);
 
     const link = `/${props.doctorId}/create`;
 
-    console.log('here')
-    console.log(link)
+    // console.log('here')
+    // console.log(link)
 
     return (
       <div className="card">

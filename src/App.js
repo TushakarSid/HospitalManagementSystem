@@ -36,24 +36,5 @@ const App = () => {
     </UserContext.Provider>
   )
 
-    // <Router>
-    //   <div className="App">
-    //     {/*<UserState>
-
-    //     <Mainbar />*/}
-    //     <Mainbar />
-    //     <br />
-    //     {/* <Route path="/" component={Mainbar} /> */}
-    //         <Route path="/doctors" component={Doctors}/>
-    //         <Route path="/list" component={AppointmentList}/>
-    //         <Route path="/edit/:id" component={EditAppointment} />
-    //         <Route path="/:doctorId/create" component={CreateAppointment} />
-    //         <Route path="/login" component={Login} />
-    //         <Route path="/signup" component={SignUp} />
-    //     {/*</UserState>*/}
-
-    //   </div>
-    // </Router>
-  // );
 }
 export default App
