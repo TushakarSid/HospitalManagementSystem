@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -14,7 +14,63 @@ const Appointment = props => (
   </tr>
 )
 
-export default class AppointmentList extends Component {
+const AppointmentList = () =>{
+
+  const [appointments,setappointments] = useState();
+  const [docId,setdocId] = useState(null);
+
+  useEffect( () => {
+    const email = local.storage.getItem('contextEmail') 
+    axios.get('http://localhost:5000/doctor/getIdByEmail',email)
+      .then(response =>{
+          setdocId(response.docId)
+      })
+
+      axios.get('http://localhost:5000/appointment/byDoctorId' , )
+      .then(response => {
+        setappointments(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  },[])
+  
+   const deleteAppointment = (id) =>{
+    axios.delete('http://localhost:5000/appointment/'+id)
+      .then(response => { console.log(response.data)});
+      setappointments(appointments.filter(el => el._id !== id))
+    }
+
+ const  AppointmentList = ()=> {
+    return appointments.map(currentAppointment => {
+      return <Appointment appointment={currentAppointment} deleteAppointment={deleteAppointment} key={currentAppointment._id}/>;
+    })
+  }
+
+  return (
+    <div>
+      <h3>Scheduled Appointments</h3>
+      <table className="table">
+        <thead className="thead-light">
+          <tr>
+            <th>Doctor's Name</th>
+            <th>Health Issues</th>
+            <th>Duration</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          { AppointmentList() }
+        </tbody>
+      </table>
+    </div>
+  )
+
+}
+
+
+/* export default class AppointmentList extends Component {
   constructor(props) {
     super(props);
 
@@ -80,4 +136,4 @@ export default class AppointmentList extends Component {
       </div>
     )
   }
-}
+} */

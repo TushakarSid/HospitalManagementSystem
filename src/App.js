@@ -11,7 +11,7 @@ import Doctors from './components/doctors.component'
 import AppointmentList from './components/appointment-list.component'
 import EditAppointment from './components/edit-appointment.component'
 import CreateAppointment from './components/create-appointment.component'
-
+import prescription from './components/prescription.component'
 import Login from './components/login.component'
 import SignUp from './components/signup.component'
 
@@ -31,6 +31,7 @@ const App = () => {
           <Route path="/:doctorId/create" component={CreateAppointment} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/:id/prescribe" component={prescription}/>
         </div>
       </Router>
     </UserContext.Provider>
