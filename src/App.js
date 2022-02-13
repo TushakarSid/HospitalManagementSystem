@@ -17,9 +17,9 @@ import SignUp from './components/signup.component'
 
 const App = () => { 
   const [contextEmail ,setContextEmail] = useState()
-  const [contextCategory ,setContextCategory] = useState()
+  const [contextCategory ,setContextCategory] = useState()  
   const [contextFname ,setContextFname] = useState()
-  const value = {contextEmail , contextCategory, setContextEmail , contextCategory, contextFname ,setContextFname}
+  const value = {contextEmail , contextCategory, setContextEmail , setContextCategory, contextFname ,setContextFname}
   return (
     <UserContext.Provider value = {value}>
       <Router>

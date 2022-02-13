@@ -24,7 +24,7 @@ const Doctors = () => {
   },[])
 
   return (
-    <div>
+    <div style={{display: "flex" , margin :"10px 10px"}}>
       {
         (doctor === undefined)?(<div> </div>):(doctor.map((resp)=>(<Card docFName={resp.docFName} docLName = {resp.docLName} doctorId = {resp._id}/>)))}
     </div>

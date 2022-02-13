@@ -17,16 +17,17 @@ const Navbar = () => {
   const {contextEmail, setContextEmail} = useContext(UserContext)
   const {contextCategory, setContextCategory} = useContext(UserContext)
   const {contextFname, setContextFname} = useContext(UserContext)
-  const x = localStorage.getItem('contextEmail')
+  const [x ,setX] = useState(contextEmail)
   const det = {
     email : x
   }
-
-  const [Fname , setFname] = useState()
-
-  useEffect(()=>{
   
-
+  const [Fname , setFname] = useState()
+  
+  useEffect(()=>{
+    
+    
+    setX(localStorage.getItem('contextEmail'))
     axios
     .post('http://localhost:5000/doctor/getDetailsByEmail',det)
     .then((res) => {
@@ -44,7 +45,8 @@ const Navbar = () => {
     localStorage.removeItem('contextFname')
     setContextFname(undefined)
     setContextEmail(undefined)
-    // setContextCategory(undefined)
+    setContextCategory(undefined)
+    setX(null)
   }
   return (
     <>
@@ -73,7 +75,7 @@ const Navbar = () => {
 
           {
           
-          (x=== null)?(
+          (x === null)?(
           <NavBtn>
             <NavBtnLink to="/SignUp">Login / SignUp</NavBtnLink>
           </NavBtn>
