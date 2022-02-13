@@ -3,7 +3,7 @@ let Drugs = require('../models/Drugs.model');
 
 router.route('/').get((req,res) => {
     Drugs.find()
-     .then(Drugs => res.json(Drugs))
+     .then(Drugs => res.json(Drugs.map(drug=>drug.drugName)))
      .catch((err) => res.status(400).json('Error: '+ err))
 })
 

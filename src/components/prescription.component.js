@@ -2,21 +2,43 @@ import React, { Component, useEffect, useState } from "react";
 import axios from "axios";
 
 const prescription = () => {
+
+  const [drugNames,setdrugNames] = useState();
+
+  useEffect(()=>{
+    axios.get('http://localhost:5000/drugs')
+     .then(response =>{
+       setdrugNames(response.data)
+     })
+  },[])
+
   return (
     <div>
-      <h3>Enter Appointment Details</h3>
+      <h3>Select Drug</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Prescription </label>
-          <input
-            type="text"
-            required
-            className="form-control"
-            value={healthIssues}
-            onChange={onChangeHealthIssues}
-          />
+          <select
+              ref="userInput"
+              required
+              className="form-control"
+              value={drugNames}
+              //onChange={this.onChangeDocName}
+            >
+              {drugNames.map(function (drugName) {
+                return (
+                  <option key={drugName} value={drugName}>
+                    {drugName}
+                  </option>
+                );
+              })}
+            </select>
         </div>
       </form>
     </div>
   );
 };
+
+
+
+export default prescription

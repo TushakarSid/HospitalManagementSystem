@@ -20,7 +20,7 @@ const AppointmentList = () =>{
   const [docId,setdocId] = useState(null);
 
   useEffect( () => {
-    const email = local.storage.getItem('contextEmail') 
+    const email = localstorage.getItem('contextEmail') 
     axios.get('http://localhost:5000/doctor/getIdByEmail',email)
       .then(response =>{
           setdocId(response.docId)
@@ -69,6 +69,7 @@ const AppointmentList = () =>{
 
 }
 
+export default AppointmentList
 
 /* export default class AppointmentList extends Component {
   constructor(props) {
