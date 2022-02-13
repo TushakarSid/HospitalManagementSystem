@@ -8,6 +8,14 @@ router.route('/').get((req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err))
 })
 
+router.route('/getIdByEmail').get((req, res) => {
+  const email = req.body.email
+
+  DocDetails.find({email :email})
+    .then(DocDetails => res.json(DocDetails))
+    .catch((err) => res.status(400).json('Error: ' + err))
+})
+
 
 router.route('/add').post(async(req, res) => {
   const docFName = req.body.docFName

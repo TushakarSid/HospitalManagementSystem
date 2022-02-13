@@ -20,11 +20,22 @@ export default class AppointmentList extends Component {
 
     this.deleteAppointment = this.deleteAppointment.bind(this)
 
-    this.state = {appointments: []};
+    this.state = {
+      appointments: [],
+      docId: null,
+
+    };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/appointment/')
+    const email = local.storage.getItem('contextEmail') 
+    axios.get('http://localhost:5000/doctor/getIdByEmail',email)
+      .then(response =>{
+        this.setState({
+          docId :response.docId
+        })
+      })
+    axios.get('http://localhost:5000/appointment/byDoctorId' , )
       .then(response => {
         this.setState({ appointments: response.data })
       })
