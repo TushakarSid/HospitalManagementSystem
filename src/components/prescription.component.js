@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import axios from "axios";
 
-const prescription = () => {
+const Prescription = () => {
 
   const [drugNames,setdrugNames] = useState();
 
@@ -12,33 +12,33 @@ const prescription = () => {
      })
   },[])
 
-  return (
-    <div>
-      <h3>Select Drug</h3>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label>Prescription </label>
-          <select
-              ref="userInput"
-              required
-              className="form-control"
-              value={drugNames}
-              //onChange={this.onChangeDocName}
-            >
-              {drugNames.map(function (drugName) {
-                return (
-                  <option key={drugName} value={drugName}>
-                    {drugName}
-                  </option>
-                );
-              })}
-            </select>
-        </div>
-      </form>
-    </div>
-  );
+  // return (
+  //   <div>
+  //     <h3>Select Drug</h3>
+  //     <form onSubmit={onSubmit}>
+  //       <div className="form-group">
+  //         <label>Prescription </label>
+  //         <select
+  //             ref="userInput"
+  //             required
+  //             className="form-control"
+  //             value={drugNames}
+  //             //onChange={this.onChangeDocName}
+  //           >
+  //             {drugNames.map(function (drugName) {
+  //               return (
+  //                 <option key={drugName} value={drugName}>
+  //                   {drugName}
+  //                 </option>
+  //               );
+  //             })}
+  //           </select>
+  //       </div>
+  //     </form>
+  //   </div>
+  // );
 };
 
 
 
-export default prescription
+export default Prescription

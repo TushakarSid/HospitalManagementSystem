@@ -8,11 +8,13 @@ router.route('/').get((req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err))
 })
 
-router.route('/getIdByEmail').get((req, res) => {
+router.route('/getIdByEmail').post((req, res) => {
   const email = req.body.email
+  console.log("email")
+  console.log(email)
 
   DocDetails.find({email :email})
-    .then(DocDetails => res.json(DocDetails))
+    .then(DocDetails => res.json(DocDetails[0]._id))
     .catch((err) => res.status(400).json('Error: ' + err))
 })
 
@@ -52,13 +54,11 @@ router.route('/add').post(async(req, res) => {
 router.route('/getDetailsByEmail').post( async(req, res) => {
   const email = req.body.email
   // const password = req.body.password
-  console.log(email)
   const detail = await DocDetails.find({ email: email })
-  console.log(detail[0])
-  return res.json({success: false, message: detail[0].docFName})
-  // return detail[0]
-
-
+  if(detail.length ==0){
+    return res.json({success: false, message: "no record with this Email"})
+  }
+  return res.json({success: true, message: detail[0].docFName})
 })
 
 
@@ -67,19 +67,14 @@ router.route('/comparePasswordByEmail').post(async (req, res) => {
   const email = req.body.email
   const password = req.body.password
 
-  console.log(email)
     const actPass = await DocDetails.find({ email: email })
-    console.log(actPass)
     if(actPass.length==0){
       return res.json({success: false, message: 'Register Yourself'})
 
     }
-  console.log(actPass[0].password)
-  console.log(password)
 
   bcrypt.compare(password,  actPass[0].password, function(err, response) {
     if (err){
-      console.log(err)
       return res.json({success: false, message: 'Techniacl Issue! Try again later'})
     }
     if (response){

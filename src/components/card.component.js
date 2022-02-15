@@ -20,7 +20,9 @@ function Card(props) {
                 <h6><b>Allergy & Clinical Immunology.</b></h6>
             </div>
             <div >
-              I am an Excellent Problem Solver( I have a strong command of Data Structures and Algorithms). I've made projects as a MERN stack developer. I've been a part of a team that deals with the NITJ's Computer Science website, giving me exposure to real-time problems..Given a chance, I will be a valuable asset to your organization.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, id quas itaque deleniti similique dolorem totam a quia, ipsam, iusto numquam? Ad delectus sunt laudantium nobis adipisci a ipsam, qui et, quis beatae impedit, possimus placeat provident est maxime ullam atque. Necessitatibus iusto eveniet debitis, at repellendus rerum repellat alias?
+
+
 
             </div>
           <p>

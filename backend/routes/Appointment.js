@@ -9,6 +9,7 @@ router.route('/').get((req, res) => {
 
 router.route('/byDoctorId').post((req, res) => {
   const docId = req.body.docId
+  console.log(docId)
   Appointment.find({docId :docId})
     .then(Appointment => res.json(Appointment))
     .catch(err => res.status(400).json('Error: ' + err));

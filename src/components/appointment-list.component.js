@@ -17,23 +17,53 @@ const Appointment = props => (
 const AppointmentList = () =>{
 
   const [appointments,setappointments] = useState();
-  const [docId,setdocId] = useState(null);
+  const [docId,setdocId] = useState();
+  let id = null
+  
 
-  useEffect( () => {
-    const email = localstorage.getItem('contextEmail') 
-    axios.get('http://localhost:5000/doctor/getIdByEmail',email)
-      .then(response =>{
-          setdocId(response.docId)
-      })
+  useEffect(  () => {
+    // const email = localStorage.getItem('contextEmail') 
+    
+    // console.log("email")
+    // console.log(email)
+    // const det ={
+    //   email :email
+    // }
+    //  axios
+    //   .post('http://localhost:5000/doctor/getIdByEmail',{email:localStorage.getItem('contextEmail')})
+    //   .then((response) =>{
+    //     setdocId("response.data")
+    //     setdocId(response.data)
+    //     id=response.data
+    //     localStorage.setItem('docId' ,response.data)
+    //   })
+    //   .catch((error)=>{
+    //     console.log(error)
+    //   })
+    //   console.log("heerA")
 
-      axios.get('http://localhost:5000/appointment/byDoctorId' , )
-      .then(response => {
-        setappointments(response.data)
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+      
+      // const xx = localStorage.getItem('docId')
+      // if(xx !== undefined)
+      // {
+        const x = {
+          docId :"62077ea8c74f9810a8b24ca5"
+        }
+
+        console.log("first")
+        axios
+        .post('http://localhost:5000/appointment/byDoctorId' , x)
+        .then((response) => {
+          console.log(response.data)
+          setappointments(response.data)
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    // }
   },[])
+  console.log("first")
+
   
    const deleteAppointment = (id) =>{
     axios.delete('http://localhost:5000/appointment/'+id)
@@ -42,13 +72,18 @@ const AppointmentList = () =>{
     }
 
  const  AppointmentList = ()=> {
-    return appointments.map(currentAppointment => {
-      return <Appointment appointment={currentAppointment} deleteAppointment={deleteAppointment} key={currentAppointment._id}/>;
-    })
+
+    // return appointments.map(currentAppointment => {
+    //   return <Appointment appointment={currentAppointment} deleteAppointment={deleteAppointment} key={currentAppointment._id}/>;
+    // })
   }
 
   return (
     <div>
+
+      {
+        
+      }
       <h3>Scheduled Appointments</h3>
       <table className="table">
         <thead className="thead-light">
@@ -61,6 +96,8 @@ const AppointmentList = () =>{
           </tr>
         </thead>
         <tbody>
+         }
+
           { AppointmentList() }
         </tbody>
       </table>
@@ -71,70 +108,3 @@ const AppointmentList = () =>{
 
 export default AppointmentList
 
-/* export default class AppointmentList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.deleteAppointment = this.deleteAppointment.bind(this)
-
-    this.state = {
-      appointments: [],
-      docId: null,
-
-    };
-  }
-
-  componentDidMount() {
-    const email = local.storage.getItem('contextEmail') 
-    axios.get('http://localhost:5000/doctor/getIdByEmail',email)
-      .then(response =>{
-        this.setState({
-          docId :response.docId
-        })
-      })
-    axios.get('http://localhost:5000/appointment/byDoctorId' , )
-      .then(response => {
-        this.setState({ appointments: response.data })
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
-
-  deleteAppointment(id) {
-    axios.delete('http://localhost:5000/appointment/'+id)
-      .then(response => { console.log(response.data)});
-
-    this.setState({
-      appointments: this.state.appointments.filter(el => el._id !== id)
-    })
-  }
-
-  AppointmentList() {
-    return this.state.appointments.map(currentAppointment => {
-      return <Appointment appointment={currentAppointment} deleteAppointment={this.deleteAppointment} key={currentAppointment._id}/>;
-    })
-  }
-
-  render() {
-    return (
-      <div>
-        <h3>Scheduled Appointments</h3>
-        <table className="table">
-          <thead className="thead-light">
-            <tr>
-              <th>Doctor's Name</th>
-              <th>Health Issues</th>
-              <th>Duration</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            { this.AppointmentList() }
-          </tbody>
-        </table>
-      </div>
-    )
-  }
-} */
