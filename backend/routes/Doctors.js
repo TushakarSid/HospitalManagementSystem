@@ -25,6 +25,7 @@ router.route('/add').post(async(req, res) => {
   const mobile = req.body.mobile
   const email = req.body.email
   const password = req.body.password
+  const pic = req.body.pic
 
   const newDoc = new DocDetails({
     docFName,
@@ -32,6 +33,7 @@ router.route('/add').post(async(req, res) => {
     mobile,
     email,
     password,
+    pic
   })
 
   const emailAlreadyExist = await DocDetails.find({ email: email })
@@ -58,7 +60,11 @@ router.route('/getDetailsByEmail').post( async(req, res) => {
   if(detail.length ==0){
     return res.json({success: false, message: "no record with this Email"})
   }
-  return res.json({success: true, message: detail[0].docFName})
+  return res.json({
+    success: true,
+    docFname: detail[0].docFName,
+    pic : detail[0].pic
+  })
 })
 
 

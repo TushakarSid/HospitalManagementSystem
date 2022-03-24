@@ -1,7 +1,6 @@
 import React,{useState} from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import UserContext from "./components/UserContext";
-// import  { UserProvider } from './components/UserContext'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './index.css'
 
@@ -14,6 +13,8 @@ import CreateAppointment from './components/create-appointment.component'
 import prescription from './components/prescription.component'
 import Login from './components/login.component'
 import SignUp from './components/signup.component'
+
+
 
 const App = () => { 
   const [contextEmail ,setContextEmail] = useState()

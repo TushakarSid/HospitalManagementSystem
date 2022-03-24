@@ -23,15 +23,16 @@ const Navbar = () => {
   }
   
   const [Fname , setFname] = useState()
+  const [pic , setPic] = useState()
   
   useEffect(()=>{
-    
-    
     setX(localStorage.getItem('contextEmail'))
     axios
     .post('http://localhost:5000/doctor/getDetailsByEmail',det)
     .then((res) => {
-      setFname(res.data.message)
+      setFname(res.data.docFname)
+      setPic(res.data.pic)
+      console.log(res.data.docFname)
     })
     .catch((error)=>{
     })
@@ -82,8 +83,8 @@ const Navbar = () => {
 
           ):(
             <NavBtn>
-            <NavLink style = {{paddingLeft: "43px"}} to="">
-                <a value="actual value 1">{Fname}</a> 
+            <NavLink  to="">
+                <img src={pic} style={{ width: "50px",borderRadius: "45px"}} alt=""/>
                 <a value="Logout" onClick ={logoutfunction}>&nbsp;Logout</a>
 
            

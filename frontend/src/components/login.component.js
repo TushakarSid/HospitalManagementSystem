@@ -2,6 +2,7 @@ import React, {useState , useContext, useEffect} from 'react'
 import { FaWindows } from 'react-icons/fa'
 import axios from 'axios'
 import UserContext  from './UserContext'
+import Axios from 'axios'
 
 
 const Login = () => {
@@ -17,34 +18,9 @@ const Login = () => {
   const onChangeEmail = (e) => { setemail(e.target.value)}
   const onChangePassword = (e) => { setpassword(e.target.value)}
   const onChangeCategory = (e) => { setCategory(e.target.value)}
-  useEffect(() =>{
 
-    if(contextEmail !== undefined){
-      localStorage.setItem('contextEmail', contextEmail)
-      localStorage.setItem('contextCategory', contextCategory)
-      localStorage.setItem('contextFname', contextFname)
-    const xx ={
-      email : localStorage.getItem('contextEmail')
-    } 
-    console.log(xx)
 
-    if(xx != null){
-        axios
-        .post('http://localhost:5000/doctor/getDetailsByEmail',xx)
-        .then((res) => {
-          console.log("first")
-          console.log(res.data.message)
-          setContextFname(res.data.message)
-          setFname(res.data.message)
-        })
-        .catch((error)=>{
-          console.log("jnkjnjnknjn")
-        })
-      window.location.href = '/'
-
-    }
-  }
-  })
+  
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -74,8 +50,8 @@ const Login = () => {
             setContextEmail(email)
             setContextCategory(category)
             setContextFname(Fname)
-            // window.location.href = '/'
           }
+          window.location.href = '/'
         })
         .catch((error) => {
           console.log(error);
@@ -177,6 +153,7 @@ const Login = () => {
             <p className="forgot-password text-right">
               Forgot <a href="#">password?</a>
             </p>
+            
           </form>
         </div>
       </div>

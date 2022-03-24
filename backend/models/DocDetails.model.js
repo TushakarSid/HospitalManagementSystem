@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 const Schema = mongoose.Schema
 
-const userSchema = new Schema(
+const userSchema = new Schema( 
   {
     docFName: {
       type: String,
@@ -32,10 +32,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    pic: {
+      type: String,
+      default:"https://image.shutterstock.com/image-vector/man-character-face-avatar-glasses-260nw-562077406.jpg",
+    },
   },
   {
     timestamps: true,
-  },
+  }
 )
 
 userSchema.pre('save', function (next) {
