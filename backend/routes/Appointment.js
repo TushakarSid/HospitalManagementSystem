@@ -7,7 +7,14 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/byDoctorId').post((req, res) => {
+router.route('/byDoctorId/:docId').get((req, res) => {
+  const docId = req.params.docId
+  console.log(docId)
+  Appointment.find({docId :docId})
+    .then(Appointment => res.json(Appointment))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+router.route('/findByDoctorId').get((req, res) => {
   const docId = req.body.docId
   console.log(docId)
   Appointment.find({docId :docId})
@@ -35,7 +42,7 @@ router.route('/add').post((req, res) => {
 router.route('/:id').get((req, res) => {
   Appointment.findById(req.params.id)
     .then(Appointment => res.json(Appointment))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json('Error: ' + err)); 
 });
 
 router.route('/:id').delete((req, res) => {

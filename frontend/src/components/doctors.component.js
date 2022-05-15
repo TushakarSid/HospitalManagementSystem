@@ -19,7 +19,6 @@ const Doctors = () => {
       .catch((error) => {
         console.log(error);
       })
-
      
   },[])
 

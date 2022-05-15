@@ -8,8 +8,8 @@ router.route('/').get((req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err))
 })
 
-router.route('/getIdByEmail').post((req, res) => {
-  const email = req.body.email
+router.route('/getIdByEmail/:email').get((req, res) => {
+  const email = req.params.email
   console.log("email")
   console.log(email)
 

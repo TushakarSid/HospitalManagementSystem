@@ -16,53 +16,47 @@ const Appointment = props => (
 
 const AppointmentList = () =>{
 
-  const [appointments,setappointments] = useState();
+  const  [appointments,setappointments] = useState();
   const [docId,setdocId] = useState();
   let id = null
   
 
-  useEffect(  () => {
+  useEffect(   () => {
     // const email = localStorage.getItem('contextEmail') 
     
     // console.log("email")
     // console.log(email)
     // const det ={
     //   email :email
-    // }
-    //  axios
-    //   .post('http://localhost:5000/doctor/getIdByEmail',{email:localStorage.getItem('contextEmail')})
-    //   .then((response) =>{
-    //     setdocId("response.data")
-    //     setdocId(response.data)
-    //     id=response.data
-    //     localStorage.setItem('docId' ,response.data)
-    //   })
-    //   .catch((error)=>{
-    //     console.log(error)
-    //   })
-    //   console.log("heerA")
+    // }http://localhost:5000/doctor/getIdByEmail
+    let  appoin =[]
+    const ee =   localStorage.getItem('contextEmail')
+    if(docId ==undefined){
 
-      
-      // const xx = localStorage.getItem('docId')
-      // if(xx !== undefined)
-      // {
-        const x = {
-          docId :"62077ea8c74f9810a8b24ca5"
-        }
+      axios
+      .get(`http://localhost:5000/doctor/getIdByEmail/${ee}`)
+      .then((response) =>{
 
-        console.log("first")
+        setdocId(response.data)
+        localStorage.setItem('docId' ,response.data)
         axios
-        .post('http://localhost:5000/appointment/byDoctorId' , x)
+        .get(`http://localhost:5000/appointment/byDoctorId/${response.data}`)
         .then((response) => {
-          console.log(response.data)
+          appoin = response.data
           setappointments(response.data)
         })
         .catch((error) => {
           console.log(error);
         })
-    // }
-  },[])
-  console.log("first")
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    }
+
+  // },[])
+  },[appointments , docId])
+  // console.log("first")
 
   
    const deleteAppointment = (id) =>{
@@ -73,9 +67,9 @@ const AppointmentList = () =>{
 
  const  AppointmentList = ()=> {
 
-    // return appointments.map(currentAppointment => {
-    //   return <Appointment appointment={currentAppointment} deleteAppointment={deleteAppointment} key={currentAppointment._id}/>;
-    // })
+    return appointments.map(currentAppointment => {
+      return <Appointment appointment={currentAppointment} deleteAppointment={deleteAppointment} key={currentAppointment._id}/>;
+    })
   }
 
   return (
@@ -96,9 +90,7 @@ const AppointmentList = () =>{
           </tr>
         </thead>
         <tbody>
-         }
-
-          { AppointmentList() }
+         {(appointments)?AppointmentList():<></> }
         </tbody>
       </table>
     </div>
