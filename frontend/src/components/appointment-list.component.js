@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const Appointment = props => (
   <tr>
+    <td>{props.apointment.patientId}</td>
     <td>{props.appointment.healthIssues}</td>
     <td>{props.appointment.date.substring(0,10)}</td>
     <td>
@@ -18,11 +19,21 @@ const AppointmentList = () =>{
 
   const  [appointments,setappointments] = useState();
   const [docId,setdocId] = useState();
-  let id = null
-  useEffect(   () => {
-    const ee =   localStorage.getItem('contextEmail')
-    if(docId ==undefined){
+  const [patientId,setpatientId] = useState();
 
+  let id = null
+  useEffect(() => {
+    const ee =   localStorage.getItem('contextEmail')
+
+    axios
+    .get(`https://localhost:5000/appointment/getPatientIdByAppointmentId/${props.appointment._id}`)
+    .then((response) =>{
+      setpatientId(response.data)
+    })
+
+
+
+    if(docId ==undefined){
       axios
       .get(`http://localhost:5000/doctor/getIdByEmail/${ee}`)
       .then((response) =>{
@@ -44,6 +55,8 @@ const AppointmentList = () =>{
     }
   },[appointments , docId])
 
+
+
   
    const deleteAppointment = (id) =>{
     axios.delete('http://localhost:5000/appointment/'+id)
@@ -54,7 +67,7 @@ const AppointmentList = () =>{
  const  AppointmentList = ()=> {
 
     return appointments.map(currentAppointment => {
-      return <Appointment appointment={currentAppointment} deleteAppointment={deleteAppointment} key={currentAppointment._id}/>;
+      return <Appointment appointment={currentAppointment} deleteAppointment={deleteAppointment} key={currentAppointment._id} patientId={patientId}/>;
     })
   }
 

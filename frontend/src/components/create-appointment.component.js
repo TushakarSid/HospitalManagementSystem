@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext } from "react";
+import React, { Component, useState, useContext,useEffect } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -6,8 +6,27 @@ import { useParams } from "react-router-dom";
 
 const CreateAppointment = () => {
   const {doctorId} = useParams();
-
   console.log(doctorId)
+
+  const [patientId,setpatientId] = useState();
+
+  
+  let id = null
+  useEffect(() => {
+    const patientemail =   localStorage.getItem('contextEmail')
+    //if(patientId ==undefined){
+      axios
+      .get(`http://localhost:5000/patient/getIdByEmail/${patientemail}`)
+      .then((response) =>{
+        console.log(response.data)
+        setpatientId(response.data)
+        localStorage.setItem('patientId' ,response.data)
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    //}
+  },[])
 
   const [docId, setdocId] = useState(doctorId);
   const [healthIssues, sethealthIssues] = useState("");
@@ -25,7 +44,7 @@ const CreateAppointment = () => {
 
     const appointment = {
       docId: docId,
-      patientId: localStorage.getItem('docId'),
+      patientId: localStorage.getItem('patientId'),
       healthIssues: healthIssues,
       date: date,
     };

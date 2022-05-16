@@ -10,15 +10,20 @@ router.route('/').get((req, res) => {
 
 
 
-  router.route('/getIdByEmail').post((req, res) => {
-    const email = req.body.email
+  router.route('/getIdByEmail/:email').get((req, res) => {
+
+    console.log("patient was here")
+
+    const email = req.params.email
     console.log("email")
     console.log(email)
   
     PatientDetails.find({email :email})
-      .then(DocDetails => res.json(PatientDetails[0]._id))
+      .then(PatientDetails => res.json(PatientDetails[0]._id))
       .catch((err) => res.status(400).json('Error: ' + err))
   })
+
+
 
 
   
