@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/:doctorId/create" component={CreateAppointment} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/:id/prescribe" component={prescription}/>
+          <Route path="/:appoint_Id/prescribe" component={prescription}/>
         </div>
       </Router>
     </UserContext.Provider>

@@ -7,7 +7,9 @@ const Appointment = props => (
     <td>{props.appointment.healthIssues}</td>
     <td>{props.appointment.date.substring(0,10)}</td>
     <td>
-      <Link to={"/edit/"+props.appointment._id}>edit</Link> | <a href="#" onClick={() => { props.deleteAppointment(props.appointment._id) }}>delete</a>
+      <Link to={props.appointment._id+ "/prescribe"}>OPEN</Link> 
+      {/* <a href="#" onClick={() => { props.deleteAppointment(props.appointment._id) }}>delete</a> */}
+      {/* <Link to={"/edit/"+props.appointment._id}>edit</Link> | <a href="#" onClick={() => { props.deleteAppointment(props.appointment._id) }}>delete</a> */}
     </td>
   </tr>
 )
@@ -71,7 +73,10 @@ const AppointmentList = () =>{
           </tr>
         </thead>
         <tbody>
+        {/* <Link to="/"> */}
+
          {(appointments)?AppointmentList():<></> }
+        {/* </Link> */}
         </tbody>
       </table>
       </center>
