@@ -9,6 +9,18 @@ router.route('/').get((req, res) => {
   })
 
 
+
+  router.route('/getIdByEmail').post((req, res) => {
+    const email = req.body.email
+    console.log("email")
+    console.log(email)
+  
+    PatientDetails.find({email :email})
+      .then(DocDetails => res.json(PatientDetails[0]._id))
+      .catch((err) => res.status(400).json('Error: ' + err))
+  })
+
+
   
 router.route('/add').post(async(req, res) => {
   const PatFName = req.body.PatFName

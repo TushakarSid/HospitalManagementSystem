@@ -2,8 +2,9 @@ const router = require('express').Router();
 let Drugs = require('../models/Drugs.model');
 
 router.route('/').get((req,res) => {
+    console.log("drugshere")
     Drugs.find()
-     .then(Drugs => res.json(Drugs.map(drug=>drug.drugName)))
+     .then((Drugs) => res.json(Drugs))
      .catch((err) => res.status(400).json('Error: '+ err))
 })
 

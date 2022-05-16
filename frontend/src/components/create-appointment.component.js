@@ -35,7 +35,7 @@ const CreateAppointment = () => {
       .post("http://localhost:5000/appointment/add", appointment)
       .then((res) => console.log(res.data));
 
-    window.location = "/list";
+    window.location = "/";
   };
 
   return (
