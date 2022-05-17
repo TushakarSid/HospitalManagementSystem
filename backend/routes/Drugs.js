@@ -2,7 +2,6 @@ const router = require('express').Router();
 let Drugs = require('../models/Drugs.model');
 
 router.route('/').get((req,res) => {
-    console.log("drugshere")
     Drugs.find()
      .then((Drugs) => res.json(Drugs))
      .catch((err) => res.status(400).json('Error: '+ err))
@@ -10,10 +9,11 @@ router.route('/').get((req,res) => {
 
 router.route('/add').post((req,res) =>{
     const drugName = req.body.drugName;
-    console.log(req.body.drugName)
+    const drugQuantity = req.body.drugQuantity;
 
     const newDrug = new Drugs({
-        drugName
+        drugName,
+        drugQuantity
     });
 
     newDrug.save()

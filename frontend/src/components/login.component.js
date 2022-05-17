@@ -51,7 +51,7 @@ const Login = () => {
             setContextCategory(category)
             setContextFname(Fname)
           }
-          window.location.href = '/'
+          window.location.href = '/list'
         })
         .catch((error) => {
           console.log(error);
