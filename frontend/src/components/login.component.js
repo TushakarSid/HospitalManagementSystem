@@ -78,7 +78,7 @@ const Login = () => {
             setContextEmail(email)
             setContextCategory(category)
             setContextFname(Fname)
-            // window.location.href = '/'
+            window.location.href = '/'
 
           }
         })

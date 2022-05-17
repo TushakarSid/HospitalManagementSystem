@@ -8,6 +8,14 @@ router.route('/').get((req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err))
 })
 
+router.route('/doctor_details_by_email/:email').get((req, res) => {
+
+  const email = req.params.email
+  DocDetails.find({email :email})
+    .then((PatientDetails) => res.json(PatientDetails))
+    .catch((err) => res.status(400).json('Error: ' + err))
+})
+
 router.route('/getIdByEmail/:email').get((req, res) => {
   const email = req.params.email
   console.log("email")
@@ -40,7 +48,7 @@ router.route('/add').post(async(req, res) => {
   const mobileAlreadyExist = await DocDetails.find({ mobile: mobile })
 
     if(emailAlreadyExist.length > 0){
-      return res.json({success: false, message: 'Email already in Use'})
+      return res.json({success: false , message: 'Email already in Use'})
     }
     else if(mobileAlreadyExist.length > 0){
       return res.json({success: false, message: 'Mobile Number Already Registered'})

@@ -6,27 +6,25 @@ import { useParams } from "react-router-dom";
 
 const CreateAppointment = () => {
   const {doctorId} = useParams();
-  console.log(doctorId)
 
   const [patientId,setpatientId] = useState();
+  const [patientName,setPatientName] = useState();
 
-  
-  let id = null
+  //for getting patient details from its email 
   useEffect(() => {
     const patientemail =   localStorage.getItem('contextEmail')
-    //if(patientId ==undefined){
       axios
-      .get(`http://localhost:5000/patient/getIdByEmail/${patientemail}`)
+      .get(`http://localhost:5000/patient/patient_details_by_email/${patientemail}`)
       .then((response) =>{
-        console.log(response.data)
-        setpatientId(response.data)
-        localStorage.setItem('patientId' ,response.data)
+        setpatientId(response.data[0]._id)
+        setPatientName(response.data[0].PatFName + " "+ response.data[0].PatLName)
       })
       .catch((error)=>{
         console.log(error)
       })
-    //}
-  },[])
+  },[patientId , patientName])
+
+
 
   const [docId, setdocId] = useState(doctorId);
   const [healthIssues, sethealthIssues] = useState("");
@@ -42,20 +40,26 @@ const CreateAppointment = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const appointment = {
-      docId: docId,
-      patientId: localStorage.getItem('patientId'),
-      healthIssues: healthIssues,
-      date: date,
-    };
 
-    console.log(appointment);
+    {if(patientId && patientName){
 
-    axios
-      .post("http://localhost:5000/appointment/add", appointment)
-      .then((res) => console.log(res.data));
+          const appointment = {
+            docId: docId,
+            patientId: patientId,
+            patientName:patientName,
+            healthIssues: healthIssues,
+            date: date,
+          };
 
-    window.location = "/";
+          console.log(appointment);
+
+          axios
+            .post("http://localhost:5000/appointment/add", appointment)
+            .then((res) => console.log(res.data));
+
+          window.location = "/";
+
+  }}
   };
 
   return (

@@ -7,6 +7,14 @@ router.route('/').get((req, res) => {
       .then((PatientDetails) => res.json(PatientDetails))
       .catch((err) => res.status(400).json('Error: ' + err))
   })
+  
+router.route('/patient_details_by_email/:email').get((req, res) => {
+
+    const email = req.params.email
+    PatientDetails.find({email :email})
+      .then((PatientDetails) => res.json(PatientDetails))
+      .catch((err) => res.status(400).json('Error: ' + err))
+  })
 
 
 
@@ -54,13 +62,25 @@ router.route('/add').post(async(req, res) => {
     }
     else{
       newPat
-        .save()
-        .then(() => res.json('Patient Registered!')
-        )
-        .catch((err) => res.status(400).json('Error: ' + err))
-      }
+      .save()
+      .then(() => res.json('Patient Registered!'))
+      .catch((err) => res.status(400).json('Error: ' + err))
+    }
+    
+
+   
   })
 
+
+  router.route('/find_name_by_id/:patient_id').get((req, res) => {
+    const pat_id = req.params.patient_id
+    console.log(pat_id)
+    PatientDetails.find({_id:pat_id}) 
+    .then(PatientDetails => res.json(PatientDetails[0].PatFName + " " + PatientDetails[0].PatLName))
+    .catch((err) => res.status(400).json('Error: ' + err))
+
+  })
+    
 
   router.route('/comparePasswordByEmail').post(async (req, res) => {
     const email = req.body.email

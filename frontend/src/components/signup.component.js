@@ -100,6 +100,7 @@ const SignUp = () => {
                 password: password,
                 pic :pic
             }
+            console.log(patient)
             axios
                 .post('http://localhost:5000/patient/add', patient)
                 .then((res) => {
@@ -120,6 +121,8 @@ const SignUp = () => {
                     setcategory('Patient')
                     console.log(errors)
                     console.log(category)
+                    window.location.href = '/'
+
                 })
             }
     }

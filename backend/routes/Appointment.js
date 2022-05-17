@@ -54,22 +54,20 @@ router.route('/findByPatientId').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
 
-  console.log("herher")
+//adding appointment details. 
+router.route('/add').post((req, res) => {
 
   const docId = req.body.docId;
   const patientId = req.body.patientId;
+  const patientName = req.body.patientName;
   const healthIssues = req.body.healthIssues;
-  
   const date = Date.parse(req.body.date);
-
-  console.log('herhehrehr')
-  console.log(patientId)
-
+  
   const newAppointment = new Appointment({
     docId,
     patientId,
+    patientName,
     healthIssues,
     date,
   });

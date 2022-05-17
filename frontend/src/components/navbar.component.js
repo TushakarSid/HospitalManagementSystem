@@ -63,12 +63,10 @@ const Navbar = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Bars />
           <NavMenu>
-            <NavLink to="/list" activestyle>
-              Appointments
-            </NavLink>
-            <NavLink to="/doctors" activestyle>
-              Get an Appointment
-            </NavLink>
+
+            {(localStorage.getItem("contextCategory") == "Doctor")?<NavLink to="/list" activestyle>Appointments</NavLink>:<></>}
+            {(localStorage.getItem("contextCategory") == "Patient")?<NavLink to="/doctors" activestyle>Get an Appointment</NavLink>:<></>}
+            
             <NavLink to="/medicine" activestyle>
               Pharmacy
             </NavLink>
