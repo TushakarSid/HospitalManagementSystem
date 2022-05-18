@@ -12,7 +12,7 @@ router.route('/doctor_details_by_email/:email').get((req, res) => {
 
   const email = req.params.email
   DocDetails.find({email :email})
-    .then((PatientDetails) => res.json(PatientDetails))
+    .then((DocDetails) => res.json(DocDetails))
     .catch((err) => res.status(400).json('Error: ' + err))
 })
 
