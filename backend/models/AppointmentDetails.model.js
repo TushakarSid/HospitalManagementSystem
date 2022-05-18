@@ -6,6 +6,7 @@ const appointmentsSchema = new Schema({
   docId: { type: String, required: true },
   patientId :{type:String,required:true},
   patientName :{type:String,required:true},
+  docName :{type:String,required:true},
   healthIssues: { type: String, required: true },
   date: { type: Date, required: true },
 }, {

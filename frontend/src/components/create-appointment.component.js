@@ -9,6 +9,7 @@ const CreateAppointment = () => {
 
   const [patientId,setpatientId] = useState();
   const [patientName,setPatientName] = useState();
+  const [docName,setdocName] = useState();
 
   //for getting patient details from its email 
   useEffect(() => {
@@ -22,7 +23,16 @@ const CreateAppointment = () => {
       .catch((error)=>{
         console.log(error)
       })
-  },[patientId , patientName])
+
+
+      axios
+      .get(`http:://localhost:5000/doctor/doctor_details_by_id/${doctorId}}`)
+      .then((response) =>{
+        console.log(response.data)
+        setdocName(response.data[0].docFName + " "+ response.data[0].docLName)
+      })
+
+  },[patientId , patientName,docName])
 
 
 
@@ -47,6 +57,7 @@ const CreateAppointment = () => {
             docId: docId,
             patientId: patientId,
             patientName:patientName,
+            docName:docName,
             healthIssues: healthIssues,
             date: date,
           };

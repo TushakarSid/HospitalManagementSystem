@@ -49,6 +49,9 @@ const Navbar = () => {
     setContextCategory(undefined)
     setX(null)
   }
+
+  
+
   return (
     <>
       <Nav>
@@ -66,7 +69,7 @@ const Navbar = () => {
 
             {(localStorage.getItem("contextCategory") == "Doctor")?<NavLink to="/list" activestyle>Appointments</NavLink>:<></>}
             {(localStorage.getItem("contextCategory") == "Patient")?<NavLink to="/doctors" activestyle>Get an Appointment</NavLink>:<></>}
-            
+            {(localStorage.getItem("contextCategory") == "Patient")?<NavLink to="/history" activestyle>Previous Appointments</NavLink>:<></>}
             <NavLink to="/medicine" activestyle>
               Pharmacy
             </NavLink>

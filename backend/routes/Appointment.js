@@ -7,13 +7,12 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-
 router.route('/getPatientIdByAppointmentId/:id').get((req,res)=>{
   console.log("working")
 
   const id = req.params.id;
   console.log(id);
-  Appointment.find({id:id})
+  Appointment.find({_id:id})
     .then(Appointment => res.json(Appointment[0].patientId))
      .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -61,6 +60,7 @@ router.route('/add').post((req, res) => {
   const docId = req.body.docId;
   const patientId = req.body.patientId;
   const patientName = req.body.patientName;
+  const docName = req.body.docName;
   const healthIssues = req.body.healthIssues;
   const date = Date.parse(req.body.date);
   
@@ -68,6 +68,7 @@ router.route('/add').post((req, res) => {
     docId,
     patientId,
     patientName,
+    docName,
     healthIssues,
     date,
   });

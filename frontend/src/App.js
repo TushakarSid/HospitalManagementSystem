@@ -14,6 +14,7 @@ import prescription from './components/prescription.component'
 import Login from './components/login.component'
 import SignUp from './components/signup.component'
 import Add_drugs from './components/Add_drugs'
+import PreviousAppointments from './components/previous_appointments';
 
 
 
@@ -29,6 +30,7 @@ const App = () => {
           <Mainbar />
           <Route path="/doctors" component={Doctors}/>
           <Route path="/list" component={AppointmentList} />
+          <Route path="/history" component ={PreviousAppointments}/>
           <Route path="/edit/:id" component={EditAppointment} />
           <Route path="/:doctorId/create" component={CreateAppointment} />
           <Route path="/login" component={Login} />
