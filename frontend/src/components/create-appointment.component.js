@@ -69,14 +69,14 @@ const CreateAppointment = () => {
             .then((res) => console.log(res.data));
 
 
-          // window.location = "/";
+          window.location = "/";
 
   }}
   };
 
   return (
-    <div>
-      <h3>Enter Appointment Details</h3>
+    <div style={{width:'60%' , margin:'auto' , marginTop:'10%' , minHeight: '63.5vh'}}>
+      <h3 style={{textAlign:'center'}}>Enter Appointment Details</h3>
       <form onSubmit={onSubmit}>     
         <div className="form-group">
           <label>Describe your Health Issues: </label>
@@ -104,6 +104,7 @@ const CreateAppointment = () => {
             type="submit"
             value="Create Appointment"
             className="btn btn-primary"
+             style={{margin:'1% 42%'}}
           />
         </div>
 

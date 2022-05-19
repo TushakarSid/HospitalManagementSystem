@@ -129,8 +129,14 @@ const SignUp = () => {
 
     return (
 
-        <>
-            <div className="outer">
+        <div style={{ display: 'flex', backgroundColor: 'white' }}>
+            <nav className='w3-sidebar w3-hide-medium w3-hide-small' style={{ width: '40%' }}>
+                <div className='bgimg'>
+                    <img style={{ width: "607.67px", height: "796px" }}
+                        src="https://s3-ap-southeast-1.amazonaws.com/site.uploads/image/2022/05/41831652988280-699.jpg" alt="" srcset="" />
+                </div>
+            </nav>
+            <div className="outer" style={{ display:'block' , margin:'2% 1% 1% 1%' , width:'50% !important'}}>
                 <div className="inner">
                     <form onSubmit={onSubmit}>
                         <h3>Register Yourself</h3>
@@ -220,10 +226,10 @@ const SignUp = () => {
                         {(unRegistered == 2)?(<div style={{ color: 'red' }}>Email already in Use</div>):(<div></div>)}
                         {(unRegistered == 3)?(<div style={{ color: 'red' }}>Mobile Number Already Registered</div>):(<div></div>)}
                         
-                        <label for="myfile">Select a file:</label>
+                        {/* <label for="myfile">Select a file:</label>
                         <input type="file" id="myfile" name="myfile"
                             onChange={(e) => postDetails(e.target.files[0])}
-                        ></input>
+                        ></input> */}
                         <button type="submit" className="btn btn-dark btn-lg btn-block">
                             Register
                         </button>
@@ -235,7 +241,7 @@ const SignUp = () => {
            </div>
 
                 
-        </>
+        </div>
     )
 
 

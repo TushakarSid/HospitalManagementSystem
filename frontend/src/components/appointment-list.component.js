@@ -60,7 +60,7 @@ const AppointmentList = () =>{
   }
 
   return (
-    <div>
+    <div style={{minHeight: '83vh'}}>
 
       <center>
 

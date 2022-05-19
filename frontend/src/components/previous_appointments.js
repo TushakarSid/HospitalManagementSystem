@@ -50,17 +50,18 @@ const PreviousAppointments = () =>{
   }
 
   return (
-    <div>
+    <div style={{minHeight: '83vh'}}>
 
       <center>
 
       <h2>Previous Appointments</h2>
       <table className="table" style={{width:'60%'}}>
-        <thead className="thead-light">
+        <thead className="thead-light" >
           <tr>
             <th>Doctor Name</th>
             <th>Health Issues</th>
             <th>Date</th>
+            <th>Action</th>
             
           </tr>
         </thead>

@@ -16,6 +16,8 @@ import Login from './components/login.component'
 import SignUp from './components/signup.component'
 import Add_drugs from './components/Add_drugs'
 import PreviousAppointments from './components/previous_appointments';
+import FrontPage from './components/FrontPage';
+import Footer from './components/Footer';
 
 
 
@@ -27,8 +29,9 @@ const App = () => {
   return (
     <UserContext.Provider value = {value}>
       <Router>
-        <div className="App">
+        <div className="App" style={{backgroundColor:'#c0cbd4' , textTransform:'capitalize' , minHeight:'100vh' , backgroundColor:'white'}}>
           <Mainbar />
+          <Route exact path="/" component={FrontPage}/>
           <Route path="/doctors" component={Doctors}/>
           <Route path="/list" component={AppointmentList} />
           <Route path="/:id/history" component ={PreviousAppointments}/>
@@ -38,7 +41,8 @@ const App = () => {
           <Route path="/signup" component={SignUp} />
           <Route path="/:appoint_Id/prescribe" component={prescription}/>
           <Route path="/:appoint_Id/patient_appointment_details" component={patient_appointment_details}/>
-        <Route path="/add_drugs" component={Add_drugs}/>
+          <Route path="/add_drugs" component={Add_drugs}/>
+          <Footer/>
         </div>
       </Router>
     </UserContext.Provider>

@@ -127,7 +127,7 @@ const Prescription = () => {
         </Card.Body>
       </Card>
 
-      <Form style={{width:'40%' }} onSubmit={onSubmit}>
+      <Form style={{width:'40%'  , margin:'18% 2% 10% 2%'}} onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail" >
             <Card  style={{height:'40% !importnat'}}>
               <Card.Body>
@@ -153,7 +153,7 @@ const Prescription = () => {
             onChange ={onChengehow_To_Take_Medicines}
             />
         </Form.Group>
-        <Button variant="primary" type="submit" style={{width:'100%'}}>
+        <Button variant="primary" type="submit" style={{display:'block' , margin:'auto'}}>
           Submit
         </Button>
       </Form>

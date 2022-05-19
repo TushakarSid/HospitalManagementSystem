@@ -23,9 +23,11 @@ const Doctors = () => {
   },[])
 
   return (
-    <div style={{display: "flex" , margin :"10px 10px"}}>
+    <div style={{display: "flex" , margin :"3% 10%"  , minHeight:'71vh'}}>
       {
-        (doctor === undefined)?(<div> </div>):(doctor.map((resp)=>(<Card docFName={resp.docFName} docLName = {resp.docLName} doctorId = {resp._id}/>)))}
+        (doctor === undefined)?(<div> </div>):(doctor.map((resp)=>(
+        <Card docFName={resp.docFName} docLName = {resp.docLName} doctorId = {resp._id}  docImage = {resp.pic}/>
+        )))}
     </div>
   )
 }

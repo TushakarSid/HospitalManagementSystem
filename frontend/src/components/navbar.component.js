@@ -1,7 +1,6 @@
 import React, { useContext , useState , useEffect} from 'react'
 import UserContext from './UserContext'
 import axios from 'axios'
-
 import {
   Nav,
   NavLink,
@@ -76,17 +75,17 @@ const Navbar = () => {
             alt="logo"
           />
         </NavLink>
-
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <h5  style={{    color: 'white',    display: 'flex',     marginTop: '17px',}}>Dispensary Management System</h5>
+        <div style={{ display: 'flex'}}>
           <Bars />
           <NavMenu>
 
             {(localStorage.getItem("contextCategory") == "Doctor")?<NavLink to="/list" activestyle>Appointments</NavLink>:<></>}
             {(localStorage.getItem("contextCategory") == "Patient")?<NavLink to="/doctors" activestyle>Get an Appointment</NavLink>:<></>}
             {(patient_id != undefined)?<NavLink to={`/${patient_id}/history`} activestyle>Previous Appointments</NavLink>:<></>}
-            <NavLink to="/medicine" activestyle>
+            {/* <NavLink to="/add_drugs" activestyle>
               Pharmacy
-            </NavLink>
+            </NavLink> */}
           </NavMenu>
 
           {
@@ -108,8 +107,8 @@ const Navbar = () => {
           )}
         </div>
       </Nav>
-
-
+          
+      
     </>
 
   )
