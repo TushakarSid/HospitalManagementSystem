@@ -6,14 +6,6 @@ import { Button  , Card , Form}  from 'react-bootstrap';
 import Multiselect from 'multiselect-react-dropdown';
 
 
-// const Medicine_button = props => {
-//     // <h1>{props}</h1>
-//     <tr>
-//     <td>{props.appointment.patientName}</td>
-//   </tr>
-//     // <Button variant="primary" style={{margin:'auto' , width:'100%'}} >{props}</Button>
-
-// }
 
 const Prescription = () => {    
 
@@ -53,14 +45,14 @@ const Prescription = () => {
 
 
 
-//   const  medicinesPrescribed = ()=> {
+  const  medicinesPrescribed = ()=> {
 
-//     return appointment_details.medicinesPrescribed.map(cur_medicine => {
-//         console.log(cur_medicine.name)
-//         return <Medicine_button  cur_medicine={cur_medicine.name} />;
-//     })
+    return appointment_details.medicinesPrescribed.map(cur_medicine => {
+        console.log(cur_medicine.name)
+        return <Button variant="primary" style={{margin:'2px 2px '}} >{cur_medicine.name}</Button>
+    })
 
-//   }
+  }
 
   return (
     <div className="row" style={{ width: '55%'  , margin:'auto' , marginTop:'3%'}}>
@@ -74,8 +66,26 @@ const Prescription = () => {
           <Card.Text style={{textAlign:'center'}}>
           {appointment_details.healthIssues}
           </Card.Text>
-          {/* {(appointment_details.docId != '')?medicinesPrescribed():<></> } */}
 
+        </Card.Body>
+      </Card>
+      
+      <Card style={{ width: '45%'  , marginRight:'0px !important' ,margin:'2% 2%'}}>
+        <Card.Body >
+        <Card.Title style={{textAlign:'center' , fontSize: "2.0rem" }}>Medicines Prescribed</Card.Title>
+        {(appointment_details.docId != '')?medicinesPrescribed():<></> }
+
+        <Card.Text style={{textAlign:'center' , fontSize: "1.5rem"}}>
+          Doctor's Remark
+        </Card.Text>
+        
+        <Card.Text style={{fontSize: "1rem"}}>
+          {appointment_details.doctorsRemark}
+        </Card.Text>
+        
+         <Card.Text style={{textAlign:'center' , fontSize: "1.5rem"}}>
+          Wanna Book Another Appointment?
+        </Card.Text>
         </Card.Body>
       </Card>
 

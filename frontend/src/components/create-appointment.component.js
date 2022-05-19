@@ -80,8 +80,8 @@ const CreateAppointment = () => {
       <form onSubmit={onSubmit}>     
         <div className="form-group">
           <label>Describe your Health Issues: </label>
-          <input
-            type="text"
+          <textarea
+            type="textarea"
             required
             className="form-control"
             value={healthIssues}
