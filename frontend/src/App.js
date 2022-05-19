@@ -31,7 +31,7 @@ const App = () => {
           <Mainbar />
           <Route path="/doctors" component={Doctors}/>
           <Route path="/list" component={AppointmentList} />
-          <Route path="/history" component ={PreviousAppointments}/>
+          <Route path="/:id/history" component ={PreviousAppointments}/>
           <Route path="/edit/:id" component={EditAppointment} />
           <Route path="/:doctorId/create" component={CreateAppointment} />
           <Route path="/login" component={Login} />

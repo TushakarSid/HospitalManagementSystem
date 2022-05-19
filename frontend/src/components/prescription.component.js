@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 import { Button  , Card , Form}  from 'react-bootstrap';
 import Multiselect from 'multiselect-react-dropdown';
 
@@ -17,6 +17,7 @@ const Prescription = () => {
   const [options , set_options] = useState([])
   const [selectedValues , set_selectedValues] = useState([])
   const [how_To_Take_Medicines , set_how_To_Take_Medicines] = useState([])
+  const [patient_id , set_patient_id] = useState([])
 
   var available_drugs_temp = []
 
@@ -28,9 +29,11 @@ const Prescription = () => {
   useEffect(() => {
     axios.get(`http://localhost:5000/appointment/${appoint_Id}`)
     .then((response) => {
+      console.log(response.data)
       set_health_issue(response.data.healthIssues);
       set_appointment_date(response.data.date);
       set_patient_name(response.data.patientName);
+      set_patient_id(response.data.patientId);
 
     });
 
@@ -64,7 +67,7 @@ const Prescription = () => {
           set_options(tmp_)
         }
       }
-  },[available_drugs , options ]);
+  },[available_drugs , options , patient_id ]);
 
   const onSelect = val =>{
     set_selectedValues(val)
@@ -118,7 +121,9 @@ const Prescription = () => {
           <Card.Text style={{textAlign:'center'}}>
           {health_issue}
           </Card.Text>
+          <Link to={"/" + patient_id+ "/history"}>
           <Button variant="primary" style={{margin:'auto' , width:'100%'}} >See Patient's History</Button>
+          </Link>
         </Card.Body>
       </Card>
 

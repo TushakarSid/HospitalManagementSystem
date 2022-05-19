@@ -80,11 +80,7 @@ router.route('/getDetailsByEmail').post( async(req, res) => {
   if(detail.length ==0){
     return res.json({success: false, message: "no record with this Email"})
   }
-  return res.json({
-    success: true,
-    docFname: detail[0].docFName,
-    pic : detail[0].pic
-  })
+  return res.json(detail)
 })
 
 

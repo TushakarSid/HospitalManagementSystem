@@ -23,6 +23,7 @@ const Navbar = () => {
   }
   
   const [Fname , setFname] = useState()
+  const [patient_id , set_patient_id] = useState()
   const [pic , setPic] = useState()
   
   useEffect(()=>{
@@ -32,12 +33,25 @@ const Navbar = () => {
     .then((res) => {
       setFname(res.data.docFname)
       setPic(res.data.pic)
-      console.log(res.data.docFname)
     })
     .catch((error)=>{
     })
+    
+    console.log(localStorage.getItem('contextEmail'))
+    
+    if(localStorage.getItem('contextCategory') == 'Patient' && patient_id == undefined){
+
+      axios
+      .get(`http://localhost:5000/patient/getIdByEmail/${localStorage.getItem('contextEmail')}`)
+      .then((res) => {
+        console.log(res.data)
+        set_patient_id(res.data)
+      })
+      .catch((error)=>{
+      })
+    }
   
-  })
+  } , [patient_id])
 
   const logoutfunction = (e) =>{
     console.log("here")
@@ -69,7 +83,7 @@ const Navbar = () => {
 
             {(localStorage.getItem("contextCategory") == "Doctor")?<NavLink to="/list" activestyle>Appointments</NavLink>:<></>}
             {(localStorage.getItem("contextCategory") == "Patient")?<NavLink to="/doctors" activestyle>Get an Appointment</NavLink>:<></>}
-            {(localStorage.getItem("contextCategory") == "Patient")?<NavLink to="/history" activestyle>Previous Appointments</NavLink>:<></>}
+            {(patient_id != undefined)?<NavLink to={`/${patient_id}/history`} activestyle>Previous Appointments</NavLink>:<></>}
             <NavLink to="/medicine" activestyle>
               Pharmacy
             </NavLink>
