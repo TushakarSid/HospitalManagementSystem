@@ -2,8 +2,9 @@ import React, { Component, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import { Button  , Card} from 'react-bootstrap';
+import { Button  , Card , Form}  from 'react-bootstrap';
 import Multiselect from 'multiselect-react-dropdown';
+
 
 const Prescription = () => {    
 
@@ -15,8 +16,13 @@ const Prescription = () => {
   const [available_drugs , set_available_drugs] = useState([])
   const [options , set_options] = useState([])
   const [selectedValues , set_selectedValues] = useState([])
+  const [how_To_Take_Medicines , set_how_To_Take_Medicines] = useState([])
 
   var available_drugs_temp = []
+
+  const onChengehow_To_Take_Medicines = (e) => {
+    set_how_To_Take_Medicines(e.target.value);
+  };
 
   
   useEffect(() => {
@@ -67,13 +73,44 @@ const Prescription = () => {
     set_selectedValues(val)
   }
 
-  if(selectedValues.length > 0 )
-  console.log(selectedValues)
 
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(selectedValues)
+    console.log(how_To_Take_Medicines)
+    // console.log(docName)
+    {if(selectedValues.length >0 && how_To_Take_Medicines != undefined ){
+
+          const appointment = {
+            medicinesPrescribed: selectedValues,
+            doctorsRemark: how_To_Take_Medicines,
+            appoint_Id:appoint_Id
+          };
+
+          console.log(appointment);
+
+          axios
+            .post("http://localhost:5000/appointment/update_precription", appointment)
+            .then((res) => console.log(res.data))
+            .catch((error) =>{
+              console.log("i am here")
+              console.log(error)
+            })
+
+
+          window.location = "/";
+
+  }}
+  };
 
 
   return (
     <div className="row" style={{ width: '55%'  , margin:'auto' , marginTop:'3%'}}>
+
+      
+
       <Card style={{ width: '45%'  , marginRight:'0px !important'}}>
         <Card.Img variant="top" src="https://image.shutterstock.com/image-vector/man-character-face-avatar-glasses-260nw-562077406.jpg" />
         <Card.Body>
@@ -81,25 +118,40 @@ const Prescription = () => {
           <Card.Text style={{textAlign:'center'}}>
           {health_issue}
           </Card.Text>
-          <Button variant="primary" style={{margin:'auto' , width:'100%'}} >{appointment_date}</Button>
+          <Button variant="primary" style={{margin:'auto' , width:'100%'}} >See Patient's History</Button>
         </Card.Body>
       </Card>
-      {/* <div style={{width:'30%'}}>    */}
-      <Card style={{ width: '45%'  , marginRight:'0px !important'}}>
-        <Card.Img variant="top" src="https://image.shutterstock.com/image-vector/man-character-face-avatar-glasses-260nw-562077406.jpg" />
-        <Card.Body>
-        <Card.Title style={{textAlign:'center' , fontWeight:'10px' }}>Prescribe Medicines</Card.Title>
-        <Multiselect 
-            options={options}     
-            selectedValues={selectedValues}    
-            onSelect={onSelect}     
-            onRemove={onRemove}     
-            displayValue="name"     
-        />
-        </Card.Body>
-      </Card>
-       
-      {/* </div> */}
+
+      <Form style={{width:'40%' }} onSubmit={onSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail" >
+            <Card  style={{height:'40% !importnat'}}>
+              <Card.Body>
+              <Card.Title style={{textAlign:'center' , fontWeight:'10px' }}>Prescribe Medicines</Card.Title>
+              <Multiselect 
+                  options={options}     
+                  selectedValues={selectedValues}    
+                  onSelect={onSelect}     
+                  onRemove={onRemove}     
+                  displayValue="name"     
+              />
+              <Card.Text style={{textAlign:'center'}}>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+            <Form.Label>How to take Medicines?</Form.Label>
+            <Form.Control 
+            type="textarea" 
+            placeholder="How to take Medicines? " 
+            as="textarea" 
+            rows={3}
+            value={how_To_Take_Medicines}
+            onChange ={onChengehow_To_Take_Medicines}
+            />
+        </Form.Group>
+        <Button variant="primary" type="submit" style={{width:'100%'}}>
+          Submit
+        </Button>
+      </Form>
   </div>
   );
 };

@@ -24,11 +24,9 @@ const CreateAppointment = () => {
         console.log(error)
       })
 
-
       axios
-      .get(`http:://localhost:5000/doctor/doctor_details_by_id/${doctorId}}`)
+      .get(`http://localhost:5000/doctor/doctor_details_by_id/${doctorId}`)
       .then((response) =>{
-        console.log(response.data)
         setdocName(response.data[0].docFName + " "+ response.data[0].docLName)
       })
 
@@ -50,8 +48,10 @@ const CreateAppointment = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-
-    {if(patientId && patientName){
+    console.log(patientId)
+    console.log(patientName)
+    console.log(docName)
+    {if(patientId && patientName && docName){
 
           const appointment = {
             docId: docId,
@@ -68,7 +68,8 @@ const CreateAppointment = () => {
             .post("http://localhost:5000/appointment/add", appointment)
             .then((res) => console.log(res.data));
 
-          window.location = "/";
+
+          // window.location = "/";
 
   }}
   };

@@ -8,6 +8,8 @@ const appointmentsSchema = new Schema({
   patientName :{type:String,required:true},
   docName :{type:String,required:true},
   healthIssues: { type: String, required: true },
+  medicinesPrescribed: { type: [{name:'' , key:''}], required: false  , default:'none'},
+  doctorsRemark: { type: String, required: false , default:'none'},
   date: { type: Date, required: true },
 }, {
   timestamps: true,
