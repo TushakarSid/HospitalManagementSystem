@@ -11,7 +11,7 @@ const Appointment = props => (
       <td>{props.appointment.healthIssues}</td>
       <td>{props.appointment.date.substring(0,10)}</td>
       <td>
-      <Link to={props.appointment._id+ "/patient_appointment_details"}>OPEN</Link> 
+      <Link to={"/" + props.appointment._id+ "/patient_appointment_details"}>OPEN</Link> 
     </td>
     </tr>
   )
