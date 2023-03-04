@@ -21,10 +21,6 @@ import Footer from './components/Footer';
 
 
 
-
-
-
-
 const App = () => { 
   const [contextEmail ,setContextEmail] = useState()
   const [contextCategory ,setContextCategory] = useState()  

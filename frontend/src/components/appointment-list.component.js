@@ -44,7 +44,7 @@ const AppointmentList = () =>{
 
 
   
-   const deleteAppointment = (id) =>{
+  const deleteAppointment = (id) =>{
     axios.delete('http://localhost:5000/appointment/'+id)
       .then(response => { console.log(response.data)});
       setappointments(appointments.filter(el => el._id !== id))
